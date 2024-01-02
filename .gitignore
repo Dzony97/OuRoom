@@ -1,6 +1,9 @@
 
 /.idea/
 /REST API/
-/OuRoom/accounds/__pycache__/
+/OuRoom/accounts/__pycache__/
 /OuRoom/OuRoom/__pycache__/
-/OuRoom/accounds/migrations/__pycache__/
+/OuRoom/accounts/migrations/__pycache__/
+
+
+
