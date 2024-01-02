@@ -28,10 +28,11 @@ def log_in(request):
         form = LoginForm(request, data=request.POST)
 
         if form.is_valid():
-
+            #Retrieving username and password from POST data
             username = request.POST.get('username')
             password = request.POST.get('password')
 
+            #User authentication using the authenticate function
             user = authenticate(request, username=username, password=password)
 
             if user is not None:
