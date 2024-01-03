@@ -38,11 +38,17 @@ def log_in(request):
             if user is not None:
                 auth.login(request, user)
 
-                return redirect("sign_up")
+                return redirect('main_room')
 
     context = {'loginform': form}
 
     return render(request, 'accounts/login.html', context=context)
+
+def logout(request):
+
+    auth.logout(request)
+    return redirect('log_in')
+
 
 
 
