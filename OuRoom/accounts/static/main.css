@@ -8,14 +8,13 @@
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
   background: #1abc9c;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
-
 
 ::selection {
   background: rgba(26, 188, 156, 0.3);
@@ -23,14 +22,8 @@ body {
 
 h1 {
   color: #fff;
-  font-family: 'Poppins', sans-serif; /* Używamy zaimportowanej czcionki 'Poppins' */
-  font-size: 48px; /* Zwiększamy rozmiar czcionki */
-  font-weight: 600; /* Ustawiamy większą wagę czcionki dla wyróżnienia */
-  text-align: center; /* Wyśrodkowanie tekstu */
-  margin-top: 0;
-  margin-bottom: 40px; /* Zwiększamy odstęp od dołu, aby oddzielić od formularza logowania */
+  margin-bottom: 20px;
 }
-
 
 form {
   background: #fff;
