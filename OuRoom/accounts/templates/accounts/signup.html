@@ -3,17 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main.css' %}">
 </head>
 <body>
-    <h1>OuRoom/SignUp</h1>
 
     <form method="POST" autocomplete="off">
-
         {% csrf_token %}
 
-        {{registerform.as_p}}
+        <label for="{{ registerform.username.username }}"></label>
+        {{ registerform.username }}
 
-        <input type="submit" value="SignUp"/>
+        <label for="{{ registerform.email.email }}"></label>
+        {{ registerform.email }}
+
+        <label for="{{ registerform.password1.password }}"></label>
+        {{ registerform.password1 }}
+
+        <label for="{{ registerform.password2.password }}"></label>
+        {{ registerform.password2 }}
+
+        <label for="{{ registerform.first_name.firstname }}"></label>
+        {{ registerform.first_name }}
+
+        <label for="{{ registerform.last_name.lastname }}"></label>
+        {{ registerform.last_name }}
+
+
+    <input type="submit" value="SignUp"/>
 
     </form>
 </body>

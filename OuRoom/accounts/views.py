@@ -3,6 +3,7 @@ from . forms import CreateUserForm, LoginForm
 
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
 def sign_up(request):
 
@@ -13,6 +14,10 @@ def sign_up(request):
 
         if form.is_valid():
             form.save() # If the form is valid, saving the user.
+
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}')
+
             return redirect('log_in')
 
     context = {'registerform': form} # Passing the form to the template for rendering.
