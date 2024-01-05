@@ -9,19 +9,19 @@ class CreateUserForm(UserCreationForm):
 
     first_name = forms.CharField(max_length=100,
                                  required=True,
-                                 widget=forms.TextInput(attrs={'placeholder': 'First Name',
+                                 widget=forms.TextInput(attrs={'placeholder': 'Imię',
                                                                'class': 'form-control',
                                                                'id': 'firstname',
                                                                }))
     last_name = forms.CharField(max_length=100,
                                 required=True,
-                                widget=forms.TextInput(attrs={'placeholder': 'Last Name',
+                                widget=forms.TextInput(attrs={'placeholder': 'Nazwisko',
                                                               'class': 'form-control',
                                                               'id': 'lastname',
                                                               }))
     username = forms.CharField(max_length=100,
                                required=True,
-                               widget=forms.TextInput(attrs={'placeholder': 'Username',
+                               widget=forms.TextInput(attrs={'placeholder': 'Nazwa użytkownika',
                                                              'class': 'form-control',
                                                              'id': 'username',
                                                              }))
@@ -32,14 +32,14 @@ class CreateUserForm(UserCreationForm):
                                                            }))
     password1 = forms.CharField(max_length=50,
                                 required=True,
-                                widget=forms.PasswordInput(attrs={'placeholder': 'Password',
+                                widget=forms.PasswordInput(attrs={'placeholder': 'Hasło',
                                                                   'class': 'form-control',
                                                                   'data-toggle': 'password',
                                                                   'id': 'password',
                                                                   }))
     password2 = forms.CharField(max_length=50,
                                 required=True,
-                                widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password',
+                                widget=forms.PasswordInput(attrs={'placeholder': 'Powtórz hasło',
                                                                   'class': 'form-control',
                                                                   'data-toggle': 'password',
                                                                   'id': 'password',
@@ -52,7 +52,7 @@ class CreateUserForm(UserCreationForm):
 
 #Authenticate a User - Model Form
 
-class LoginForm(AuthenticationForm):
 
-    username = forms.CharField(widget=TextInput())
-    password = forms.CharField(widget=PasswordInput())
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'id': 'username', 'placeholder': 'Login'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'id': 'password', 'placeholder': 'Hasło'}))
