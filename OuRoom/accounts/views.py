@@ -42,8 +42,9 @@ def log_in(request):
 
             if user is not None:
                 auth.login(request, user)
-
                 return redirect('main_room')
+            else:
+                messages.error(request, 'Niepoprawny login lub hasło.')
 
     context = {'loginform': form}
 
