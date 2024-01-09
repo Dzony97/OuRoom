@@ -12,6 +12,7 @@ def sign_up(request):
         form = CreateUserForm(request.POST) # If yes, creating a CreateUserForm based on the data from the request.
 
         if form.is_valid():
+            messages.success(request, 'Twoje konto zostało utworzone. Możesz się zalogować.')
             form.save() # If the form is valid, saving the user.
 
             username = form.cleaned_data.get('username')
