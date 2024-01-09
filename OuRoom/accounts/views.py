@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from . forms import CreateUserForm, LoginForm
 
 from django.contrib.auth.models import auth
-from django.contrib.auth import authenticate
+from django.contrib import messages
 
 def sign_up(request):
 
@@ -38,7 +38,7 @@ def log_in(request):
                 return redirect('main_room')
 
         else:
-            print('cos tam cos tam')
+            messages.error(request, 'Niepoprawny login lub hasło.')
 
     context = {'loginform': form}
 

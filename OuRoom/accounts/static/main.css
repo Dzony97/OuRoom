@@ -92,3 +92,29 @@ a.button-style:hover {
   background-color: #12876f;
 }
 
+/* Base styles for all message types */
+.message {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #16a085; /* Base green color */
+  color: #fff; /* White text */
+  text-align: center;
+  border: 1px solid darkgreen; /* Slightly darker border for contrast */
+}
+
+
+.message-info {
+  background-color: #148f77;
+}
+
+.message-success {
+  background-color: #16a085;
+}
+
+.message-warning {
+  background-color: #13856a;
+}
+
+.message-error {
+  background-color: #117556;
