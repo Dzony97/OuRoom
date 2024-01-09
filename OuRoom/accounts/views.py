@@ -2,8 +2,7 @@ from django.shortcuts import render, redirect
 from . forms import CreateUserForm, LoginForm
 
 from django.contrib.auth.models import auth
-from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
+from django.contrib.auth import authenticate
 
 def sign_up(request):
 
@@ -16,7 +15,6 @@ def sign_up(request):
             form.save() # If the form is valid, saving the user.
 
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}')
 
             return redirect('log_in')
 
@@ -39,12 +37,14 @@ def log_in(request):
 
             #User authentication using the authenticate function
             user = authenticate(request, username=username, password=password)
+            print(f'user: {user}')
 
             if user is not None:
                 auth.login(request, user)
+                print('elo')
                 return redirect('main_room')
             else:
-                messages.error(request, 'Niepoprawny login lub hasło.')
+                print('none')
 
     context = {'loginform': form}
 
