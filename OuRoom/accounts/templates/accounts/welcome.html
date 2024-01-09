@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Base Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+<body>
+
+    <h1>OuRoom</h1>
+
+    {% block content %}
+    <a href="{% url 'log_in' %}" class="button-style">Zaloguj się</a>
+    {% endblock content %}
+
+</body>
+</html>

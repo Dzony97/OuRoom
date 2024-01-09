@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'main.css' %}">
-</head>
-<body>
-
-    <h1>OuRoom</h1>
+{% extends "accounts/welcome.html" %}
+{% block content %}
 
     <form method="POST" autocomplete="off">
         {% csrf_token %}
@@ -37,5 +28,5 @@
     <p>Masz juz konto? <a href="{% url 'log_in' %}">Zaloguj się</a> </p>
 
     </form>
-</body>
-</html>
+
+{% endblock content %}

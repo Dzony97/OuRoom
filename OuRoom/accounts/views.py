@@ -31,20 +31,14 @@ def log_in(request):
         form = LoginForm(request, data=request.POST)
 
         if form.is_valid():
-            #Retrieving username and password from POST data
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-
-            #User authentication using the authenticate function
-            user = authenticate(request, username=username, password=password)
-            print(f'user: {user}')
+            user = form.get_user()
 
             if user is not None:
                 auth.login(request, user)
-                print('elo')
                 return redirect('main_room')
-            else:
-                print('none')
+
+        else:
+            print('cos tam cos tam')
 
     context = {'loginform': form}
 
@@ -53,7 +47,10 @@ def log_in(request):
 def logout(request):
 
     auth.logout(request)
-    return redirect('log_in')
+    return render(request, 'accounts/logout.html')
+
+def welcome(request):
+    return render(request, 'accounts/welcome.html')
 
 
 
