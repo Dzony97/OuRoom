@@ -29,6 +29,9 @@ ALLOWED_HOSTS = []
 
 import os
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+
 # Application definition
 
 INSTALLED_APPS = [
