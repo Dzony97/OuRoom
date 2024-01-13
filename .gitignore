@@ -8,5 +8,28 @@
 /OuRoom/rooms/migrations/__pycache__/
 /OuRoom/db.sqlite3/
 
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
 
+# Caches and logs (Python/Jupyter/IPython, etc.)
+.ipynb_checkpoints
+cache/
+logs/
+
+# Development environments settings
+.idea/
+
+# SQLite database file
+db.sqlite3
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
