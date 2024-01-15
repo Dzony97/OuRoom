@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from . forms import CreateUserForm, LoginForm
+from .models import CustomUser
 
 from django.contrib.auth.models import auth
 from django.contrib import messages
@@ -9,15 +10,28 @@ def sign_up(request):
     form = CreateUserForm()
 
     if request.method == "POST":
-        form = CreateUserForm(request.POST) # If yes, creating a CreateUserForm based on the data from the request.
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        password1 = request.POST.get("password1")
+        password2 = request.POST.get("password2")
+
+        form = CreateUserForm(request.POST)
+
+        if password1 != password2:
+            messages.warning(request, "Podane hasła różnią się od siebie.")
+            return redirect('sign_up')
+        elif CustomUser.objects.filter(username=username).exists():
+            messages.info(request, 'Nazwa użytkwnika jest już zajęta.')
+            return redirect('sign_up')
+        elif CustomUser.objects.filter(email=email).exists():
+            messages.info(request, 'Podany email jest już zajęty.')
 
         if form.is_valid():
             messages.success(request, 'Twoje konto zostało utworzone. Możesz się zalogować.')
             form.save() # If the form is valid, saving the user.
-
-            username = form.cleaned_data.get('username')
-
             return redirect('log_in')
+
+
 
     context = {'registerform': form} # Passing the form to the template for rendering.
 

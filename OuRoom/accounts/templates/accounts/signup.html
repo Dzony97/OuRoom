@@ -28,5 +28,13 @@
     <p>Masz juz konto? <a href="{% url 'log_in' %}">Zaloguj się</a> </p>
 
     </form>
+    </br>
+    {% if messages %}
+      {% for message in messages %}
+        <div class="message message-{{ message.tags }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
 
 {% endblock content %}
