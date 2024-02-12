@@ -21,9 +21,6 @@ logs/
 # Development environments settings
 .idea/
 
-# SQLite database file
-db.sqlite3
-
 # Environments
 .env
 .venv
