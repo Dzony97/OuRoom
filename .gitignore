@@ -6,6 +6,7 @@
 /OuRoom/accounts/migrations/__pycache__/
 /OuRoom/rooms/__pycache__/
 /OuRoom/rooms/migrations/__pycache__/
+/OuRoom/db.sqlite3/
 
 
 # Byte-compiled / optimized / DLL files
