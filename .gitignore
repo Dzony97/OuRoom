@@ -8,7 +8,6 @@
 /OuRoom/rooms/migrations/__pycache__/
 /OuRoom/db.sqlite3/
 
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -18,7 +17,6 @@ __pycache__/
 .ipynb_checkpoints
 cache/
 logs/
-<<<<<<< HEAD
 
 # Development environments settings
 .idea/
@@ -31,8 +29,6 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-=======
->>>>>>> 445c1da (Modified gitignore)
 
 # Development environments settings
 .idea/

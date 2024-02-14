@@ -103,6 +103,38 @@ a.button-style:hover {
   border: 1px solid darkgreen; /* Slightly darker border for contrast */
 }
 
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #16a085; /* Dostosuj kolor tła do swoich potrzeb */
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Zapewnia, że pasek będzie zawsze na wierzchu */
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link, .nav-icon {
+    text-decoration: none;
+    color: #fff;
+    margin: 0 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-icon:hover, .nav-link:hover {
+    background-color: #12876f; /* Lekkie przyciemnienie przy najechaniu */
+}
+
 
 .message-info {
   background-color: #148f77;
