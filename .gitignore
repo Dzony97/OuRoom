@@ -18,6 +18,7 @@ __pycache__/
 .ipynb_checkpoints
 cache/
 logs/
+<<<<<<< HEAD
 
 # Development environments settings
 .idea/
@@ -30,4 +31,17 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+=======
+>>>>>>> 445c1da (Modified gitignore)
 
+# Development environments settings
+.idea/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
