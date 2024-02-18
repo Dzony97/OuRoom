@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from . forms import CreateUserForm, LoginForm
-from .models import CustomUser
+from .models import CustomUser, Profile
 
 from django.contrib.auth.models import auth
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 def sign_up(request):
@@ -69,6 +70,10 @@ def logout(request):
 def welcome(request):
     return render(request, 'accounts/welcome.html')
 
+@login_required
+def profile_view(request):
+    user_profile, created = Profile.objects.get_or_create(user=request.user)
+    return render(request, 'rooms/profile.html', {'profile': user_profile})
 
 
 

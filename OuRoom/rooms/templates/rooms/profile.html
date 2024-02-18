@@ -1,6 +1,13 @@
 {% extends "rooms/mainroom.html" %}
-
-
 {% block content %}
-    <h1>Profile</h1>
+    <div class="profile-container">
+      <div class="profile-image">
+        <img src="{{ profile.image.url }}" alt="Profilowe zdjęcie użytkownika">
+      </div>
+      <div class="profile-info">
+        <h3>{{ profile.user.username }}</h3>
+        <p>Lokalizacja: {{ profile.location }}</p>
+        <p>Data urodzenia: {{ profile.birth_date|date:"Y-m-d" }}</p>
+      </div>
+    </div>
 {% endblock content %}

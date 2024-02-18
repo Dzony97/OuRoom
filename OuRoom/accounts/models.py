@@ -12,6 +12,6 @@ class Profile(models.Model):
     birth_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
-        return f'{self.user.username} Profil - Lokalizacja: {self.location} - Data urodzenia: {self.birth_date}'
+        return f'{self.user.username} Profil - Lokalizacja: {self.location} - Data urodzenia: {self.birth_date} - Email: {self.user.email}'
 
 
