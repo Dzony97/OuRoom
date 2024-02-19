@@ -6,8 +6,18 @@
       </div>
       <div class="profile-info">
         <h3>{{ profile.user.username }}</h3>
+        <p>Imię: {{ profile.user.first_name}}</p>
+        <p>Nazwisko: {{ profile.user.last_name}}</p>
+
+        {% if profile.location %}
         <p>Lokalizacja: {{ profile.location }}</p>
+        {% endif %}
+
+        {% if profile.birth_date %}
         <p>Data urodzenia: {{ profile.birth_date|date:"Y-m-d" }}</p>
+        {% endif %}
+
+        <p>Email: {{ profile.user.email }}</p>
       </div>
     </div>
 {% endblock content %}
