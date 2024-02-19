@@ -108,13 +108,13 @@ a.button-style:hover {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #16a085; /* Dostosuj kolor tła do swoich potrzeb */
+    background-color: #16a085;
     color: #fff;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* Zapewnia, że pasek będzie zawsze na wierzchu */
+    z-index: 1000;
 }
 
 .nav-left, .nav-right {
@@ -132,7 +132,7 @@ a.button-style:hover {
 }
 
 .nav-icon:hover, .nav-link:hover {
-    background-color: #12876f; /* Lekkie przyciemnienie przy najechaniu */
+    background-color: #12876f;
 }
 
 .profile-container {
@@ -144,6 +144,26 @@ a.button-style:hover {
   max-width: 400px;
   width: 100%;
   margin: 20px;
+  position: relative;
+}
+
+.settings-menu {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  margin: 20px;
+  position: relative;
+}
+
+.settings-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
 }
 
 .profile-image img {

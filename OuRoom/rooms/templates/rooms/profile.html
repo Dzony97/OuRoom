@@ -1,10 +1,12 @@
 {% extends "rooms/mainroom.html" %}
 {% block content %}
     <div class="profile-container">
+      <i class="fa-solid fa-gear settings-icon"></i>
       <div class="profile-image">
         <img src="{{ profile.image.url }}" alt="Profilowe zdjęcie użytkownika">
       </div>
       <div class="profile-info">
+
         <h3>{{ profile.user.username }}</h3>
         <p>Imię: {{ profile.user.first_name}}</p>
         <p>Nazwisko: {{ profile.user.last_name}}</p>
@@ -19,5 +21,27 @@
 
         <p>Email: {{ profile.user.email }}</p>
       </div>
+
+      <div id="settings-menu" style="display:none;">
+        <p>Imię: {{ profile.user.first_name}}</p>
+      </div>
+
     </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var settingsIcon = document.querySelector('.settings-icon');
+        var profileInfo = document.querySelector('.profile-info'); // Element z informacjami o profilu
+        var settingsMenu = document.getElementById('settings-menu'); // Element z menu ustawień
+
+        settingsIcon.addEventListener('click', function() {
+          if (settingsMenu.style.display === "none") {
+            settingsMenu.style.display = "block"; // Pokaż menu ustawień
+            profileInfo.style.display = "none"; // Ukryj informacje o profilu
+          } else {
+            settingsMenu.style.display = "none"; // Ukryj menu ustawień
+            profileInfo.style.display = "block"; // Pokaż informacje o profilu
+          }
+        });
+      });
+    </script>
 {% endblock content %}
