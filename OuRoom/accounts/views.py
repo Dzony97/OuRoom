@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from . forms import CreateUserForm, LoginForm
+from . forms import CreateUserForm, LoginForm, ProfileUpdateForm, UserUpdateForm
 from .models import CustomUser, Profile
 
 from django.contrib.auth.models import auth
@@ -72,8 +72,32 @@ def welcome(request):
 
 @login_required
 def profile_view(request):
-    user_profile, created = Profile.objects.get_or_create(user=request.user)
-    return render(request, 'rooms/profile.html', {'profile': user_profile})
+
+    if request.method == "POST":
+
+        u_form = UserUpdateForm(request.POST, instance=request.user) # instance mówi formularzowi, że ma on operować na istniejącej instancji modelu
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile) # instance mowi formularzowi ze ma operować na modelu profile
+
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Twoje konto zostało zaktualizowane!')
+            return redirect('profile')
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    user_profile, created = Profile.objects.get_or_create(user=request.user) #  # Created or download user profile
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+        'profile': user_profile
+    }
+
+
+    return render(request, 'rooms/profile.html', context)
 
 
 

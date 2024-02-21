@@ -30,16 +30,16 @@
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         var settingsIcon = document.querySelector('.settings-icon');
-        var profileInfo = document.querySelector('.profile-info'); // Element z informacjami o profilu
-        var settingsMenu = document.getElementById('settings-menu'); // Element z menu ustawień
+        var profileInfo = document.querySelector('.profile-info'); // Profile Info
+        var settingsMenu = document.getElementById('settings-menu'); // Settings menu
 
         settingsIcon.addEventListener('click', function() {
           if (settingsMenu.style.display === "none") {
-            settingsMenu.style.display = "block"; // Pokaż menu ustawień
-            profileInfo.style.display = "none"; // Ukryj informacje o profilu
+            settingsMenu.style.display = "block"; // Show settings menu
+            profileInfo.style.display = "none"; // Hide profile info
           } else {
-            settingsMenu.style.display = "none"; // Ukryj menu ustawień
-            profileInfo.style.display = "block"; // Pokaż informacje o profilu
+            settingsMenu.style.display = "none"; // Hide settings menu
+            profileInfo.style.display = "block"; // Show profile
           }
         });
       });
