@@ -8,8 +8,14 @@
       <div class="profile-info">
 
         <h3>{{ profile.user.username }}</h3>
+
+        {% if profile.user.first_name  %}
         <p>Imię: {{ profile.user.first_name}}</p>
+        {% endif %}
+
+        {% if profile.user.last_name %}
         <p>Nazwisko: {{ profile.user.last_name}}</p>
+        {% endif %}
 
         {% if profile.location %}
         <p>Lokalizacja: {{ profile.location }}</p>
@@ -23,10 +29,46 @@
       </div>
 
       <div id="settings-menu" style="display:none;">
-        <p>Imię: {{ profile.user.first_name}}</p>
+
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <fieldset>
+            <legend>Zmiana hasła</legend>
+
+            {{ ch_form.new_password1 }}
+
+            {{ ch_form.new_password2 }}
+
+          </fieldset>
+
+          <fieldset>
+            <legend>Profil</legend>
+
+            {{ u_form.first_name }}
+
+            {{ u_form.last_name }}
+
+            {{ p_form.location }}
+
+            {{ p_form.birth_date }}
+          </fieldset>
+
+          <button type="submit">Aktualizuj</button>
+        </form>
+
       </div>
 
     </div>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="message message-{{ message.tags }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         var settingsIcon = document.querySelector('.settings-icon');

@@ -1,5 +1,6 @@
+from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import render, redirect
-from . forms import CreateUserForm, LoginForm, ProfileUpdateForm, UserUpdateForm
+from . forms import CreateUserForm, LoginForm, ProfileUpdateForm, UserUpdateForm, SetPasswordForm
 from .models import CustomUser, Profile
 
 from django.contrib.auth.models import auth
@@ -77,6 +78,13 @@ def profile_view(request):
 
         u_form = UserUpdateForm(request.POST, instance=request.user) # instance mówi formularzowi, że ma on operować na istniejącej instancji modelu
         p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile) # instance mowi formularzowi ze ma operować na modelu profile
+        ch_form = SetPasswordForm(request.user, request.POST)
+
+        if ch_form.is_valid():
+            ch_form.save()
+            update_session_auth_hash(request, request.user)
+            messages.success(request, f'Twoje hasło zostało zmienione!')
+            return redirect('profile')
 
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
@@ -84,21 +92,23 @@ def profile_view(request):
             messages.success(request, f'Twoje konto zostało zaktualizowane!')
             return redirect('profile')
 
+
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
+        ch_form = SetPasswordForm(request.user)
 
     user_profile, created = Profile.objects.get_or_create(user=request.user) #  # Created or download user profile
 
     context = {
         'u_form': u_form,
         'p_form': p_form,
-        'profile': user_profile
+        'profile': user_profile,
+        'ch_form': ch_form
     }
 
 
     return render(request, 'rooms/profile.html', context)
-
 
 
 

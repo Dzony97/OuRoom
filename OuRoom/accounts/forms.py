@@ -1,6 +1,7 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, SetPasswordForm
 from django import forms
 from .models import CustomUser, Profile
+
 
 
 #Create/Register User - Model Form
@@ -49,14 +50,20 @@ class CreateUserForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2', 'last_name', 'first_name'] # List of fields to be included in the form.
 
 class UserUpdateForm(forms.ModelForm):
+
     class Meta:
         model = CustomUser
-        fields = ['password', 'password', 'last_name', 'first_name']
+        fields = ['last_name', 'first_name']
+
+class SetPasswordForm(SetPasswordForm):
+    class Meta:
+        model = CustomUser
+        fields = ['new_password1', 'new_password2']
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['location', 'birth_date', 'image']
+        fields = ['location', 'birth_date']
 
 #Authenticate a User - Model Form
 class LoginForm(AuthenticationForm):
