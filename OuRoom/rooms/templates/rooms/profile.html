@@ -70,20 +70,26 @@
     {% endif %}
 
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        var settingsIcon = document.querySelector('.settings-icon');
-        var profileInfo = document.querySelector('.profile-info'); // Profile Info
-        var settingsMenu = document.getElementById('settings-menu'); // Settings menu
+    document.addEventListener('DOMContentLoaded', function() {
+      var showSettings = "{{ show_settings }}";  // Pobierz flagę z kontekstu
+      var settingsIcon = document.querySelector('.settings-icon');
+      var profileInfo = document.querySelector('.profile-info');
+      var settingsMenu = document.getElementById('settings-menu');
 
-        settingsIcon.addEventListener('click', function() {
-          if (settingsMenu.style.display === "none") {
-            settingsMenu.style.display = "block"; // Show settings menu
-            profileInfo.style.display = "none"; // Hide profile info
-          } else {
-            settingsMenu.style.display = "none"; // Hide settings menu
-            profileInfo.style.display = "block"; // Show profile
-          }
-        });
+      if (showSettings === "True") {
+        settingsMenu.style.display = "block";  // Pokaż menu ustawień
+        profileInfo.style.display = "none";    // Ukryj informacje o profilu
+      }
+
+      settingsIcon.addEventListener('click', function() {
+        if (settingsMenu.style.display === "none") {
+          settingsMenu.style.display = "block";
+          profileInfo.style.display = "none";
+        } else {
+          settingsMenu.style.display = "none";
+          profileInfo.style.display = "block";
+        }
       });
+    });
     </script>
 {% endblock content %}

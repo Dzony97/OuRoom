@@ -74,32 +74,32 @@ def welcome(request):
 @login_required
 def profile_view(request):
 
-    if request.method == "POST":
-
-        ch_form = SetPasswordForm(request.user, request.POST)
-
-        if ch_form.is_valid():
-            ch_form.save()
-            update_session_auth_hash(request, request.user)
-            messages.success(request, "Twoje hasło zostało zmienione!")
-            return redirect('profile')
-    else:
-        ch_form = SetPasswordForm(request.user)
+    show_settings = False
 
     if request.method == "POST":
 
         u_form = UserUpdateForm(request.POST, instance=request.user) # instance mówi formularzowi, że ma on operować na istniejącej instancji modelu
         p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile) # instance mowi formularzowi ze ma operować na modelu profile
+        ch_form = SetPasswordForm(request.user, request.POST)
+        new_password1 = request.POST.get('new_password1')
+        new_password2 = request.POST.get('new_password2')
 
-        if u_form.is_valid() and p_form.is_valid():
+        if new_password1 != new_password2:
+            messages.error(request, "Podane hasła różnią się od siebie!")
+            show_settings = True
+
+        if u_form.is_valid() and p_form.is_valid() and ch_form.is_valid():
             u_form.save()
             p_form.save()
+            ch_form.save()
             messages.success(request, f'Twoje konto zostało zaktualizowane!')
+            update_session_auth_hash(request, request.user)
             return redirect('profile')
 
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
+        ch_form = SetPasswordForm(request.user)
 
     user_profile, created = Profile.objects.get_or_create(user=request.user) #  # Created or download user profile
 
@@ -107,7 +107,8 @@ def profile_view(request):
         'u_form': u_form,
         'p_form': p_form,
         'profile': user_profile,
-        'ch_form': ch_form
+        'ch_form': ch_form,
+        'show_settings': show_settings
     }
 
     return render(request, 'rooms/profile.html', context)
