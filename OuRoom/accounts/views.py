@@ -76,15 +76,20 @@ def profile_view(request):
 
     if request.method == "POST":
 
-        u_form = UserUpdateForm(request.POST, instance=request.user) # instance mówi formularzowi, że ma on operować na istniejącej instancji modelu
-        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile) # instance mowi formularzowi ze ma operować na modelu profile
         ch_form = SetPasswordForm(request.user, request.POST)
 
         if ch_form.is_valid():
             ch_form.save()
             update_session_auth_hash(request, request.user)
-            messages.success(request, f'Twoje hasło zostało zmienione!')
+            messages.success(request, "Twoje hasło zostało zmienione!")
             return redirect('profile')
+    else:
+        ch_form = SetPasswordForm(request.user)
+
+    if request.method == "POST":
+
+        u_form = UserUpdateForm(request.POST, instance=request.user) # instance mówi formularzowi, że ma on operować na istniejącej instancji modelu
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile) # instance mowi formularzowi ze ma operować na modelu profile
 
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
@@ -92,11 +97,9 @@ def profile_view(request):
             messages.success(request, f'Twoje konto zostało zaktualizowane!')
             return redirect('profile')
 
-
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
-        ch_form = SetPasswordForm(request.user)
 
     user_profile, created = Profile.objects.get_or_create(user=request.user) #  # Created or download user profile
 
@@ -107,9 +110,7 @@ def profile_view(request):
         'ch_form': ch_form
     }
 
-
     return render(request, 'rooms/profile.html', context)
-
 
 
 
