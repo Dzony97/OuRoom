@@ -113,5 +113,8 @@ def profile_view(request):
 
     return render(request, 'rooms/profile.html', context)
 
+def password_reset(request):
+    return render(request, 'accounts/password_reset.html')
+
 
 
