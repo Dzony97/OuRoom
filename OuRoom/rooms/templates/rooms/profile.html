@@ -31,6 +31,7 @@
       <div id="settings-menu" style="display:none;">
 
         <form method="POST">
+
           {% csrf_token %}
 
             <legend>Zmiana hasła</legend>
@@ -38,6 +39,14 @@
             {{ ch_form.new_password1 }}
 
             {{ ch_form.new_password2 }}
+
+          <button type="submit" name="action" value="update_password">Zmień hasło</button>
+
+        </form>
+
+        <form method="POST">
+
+          {% csrf_token %}
 
             <legend>Profil</legend>
 
@@ -49,8 +58,7 @@
 
             {{ p_form.birth_date }}
 
-
-          <button type="submit">Aktualizuj</button>
+          <button type="submit" name="action" value="update_profile">Aktualizuj profil</button>
         </form>
 
       </div>

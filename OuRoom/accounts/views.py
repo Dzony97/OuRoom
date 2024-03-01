@@ -84,21 +84,24 @@ def profile_view(request):
         new_password1 = request.POST.get('new_password1')
         new_password2 = request.POST.get('new_password2')
 
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            messages.success(request, f'Twoje konto zostało zaktualizowane!')
-            return redirect('profile')
+        if request.POST['action'] == 'update_profile':
 
-        elif new_password1 != new_password2:
-            messages.error(request, "Podane hasła różnią się od siebie!")
-            show_settings = True
+            if u_form.is_valid() and p_form.is_valid():
+                u_form.save()
+                p_form.save()
+                messages.success(request, f'Twoje konto zostało zaktualizowane!')
+                return redirect('profile')
 
-        else:
-            ch_form.save()
-            messages.success(request, f'Twoje hasło zostało zmienione!')
-            update_session_auth_hash(request, request.user)
-            return redirect('profile')
+        if request.POST['action'] == 'update_password':
+
+            if ch_form.is_valid():
+                ch_form.save()
+                messages.success(request, f'Twoje hasło zostało zmienione!')
+                update_session_auth_hash(request, request.user)
+                return redirect('profile')
+            elif new_password1 != new_password2:
+                messages.error(request, "Podane hasła różnią się od siebie!")
+                show_settings = True
 
     else:
         u_form = UserUpdateForm(instance=request.user)
