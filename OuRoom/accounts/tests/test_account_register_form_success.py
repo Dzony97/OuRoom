@@ -1,4 +1,4 @@
-from ..forms import CreateUserForm, UserUpdateForm, ProfileUpdateForm
+from ..forms import CreateUserForm, UserUpdateForm, ProfileUpdateForm, SetPasswordForm
 from ..models import CustomUser, Profile
 import pytest
 
@@ -148,3 +148,41 @@ def test_profile_update_form_success():
     assert result is True
     assert profile.location == "Krasnystaw"
     assert profile.birth_date.strftime('%Y-%m-%d') == "2023-12-12"
+
+@pytest.mark.django_db
+def change_password_success():
+    #Arrange
+    user = CustomUser.objects.create_user(username='testuser', password='12345')
+
+    form_data = {'new_password1': '54321', 'new_password2': '54321'}
+
+    form = SetPasswordForm(data=form_data, instance=user)
+
+    #Action
+
+    result = form.is_valid()
+    if result:
+        form.save()
+        user.refresh_from_db()
+
+    #Assert
+    assert result is True
+
+@pytest.mark.django_db
+def change_password_fail():
+    #Arrange
+    user = CustomUser.objects.create_user(username='testuser', password='12345')
+
+    form_data = {'new_password1': '54321', 'new_password2': '543211'}
+
+    form = SetPasswordForm(data=form_data, instance=user)
+
+    #Action
+
+    result = form.is_valid()
+    if result:
+        form.save()
+        user.refresh_from_db()
+
+    #Assert
+    assert result is False
