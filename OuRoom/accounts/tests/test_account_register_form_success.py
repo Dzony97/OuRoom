@@ -1,5 +1,5 @@
-from ..forms import CreateUserForm
-from ..models import CustomUser
+from ..forms import CreateUserForm, UserUpdateForm, ProfileUpdateForm
+from ..models import CustomUser, Profile
 import pytest
 
 @pytest.mark.django_db
@@ -75,3 +75,76 @@ def test_account_register_form_invalid_duplicate_username():
     # Assert
     assert result is False
     assert form.errors["username"][0] == "A user with that username already exists."
+
+@pytest.mark.django_db
+def test_user_update_form_success():
+    # Arrange
+    user = CustomUser.objects.create_user(username='testowy', password='12335', last_name='testname', first_name='firsttest')
+
+    form_data = {"last_name": "Nazwisko", "first_name": "Imię"}
+
+    form = UserUpdateForm(data=form_data, instance=user)
+
+    #Action
+    result = form.is_valid()
+    if result:
+        form.save()
+        user.refresh_from_db()
+
+    #Assert
+    assert result is True
+    assert user.last_name == "Nazwisko"
+    assert user.first_name == "Imię"
+
+@pytest.mark.django_db
+def test_user_update_form_fail():
+    #Arrange
+    form = UserUpdateForm({"last_name": "",
+                           "first_name": "Imię",})
+
+    #Action
+    result = form.is_valid()
+
+    #Assert
+    assert result is False
+
+@pytest.mark.django_db
+def test_profile_update_form_fail():
+    # Arrange
+    user = CustomUser.objects.create_user(username='testuser', password='12345')
+    profile = Profile.objects.create(user=user, location='New Location', birth_date='2000-01-01')
+
+    form_data = {
+        "location": "Krasnystaw",
+        "birth_date": "2023-13-13",
+    }
+    form = ProfileUpdateForm(data=form_data, instance=profile)
+
+    # Action
+    result = form.is_valid()
+
+    # Assert
+    assert result is False
+
+@pytest.mark.django_db
+def test_profile_update_form_success():
+    # Arrange
+    user = CustomUser.objects.create_user(username='testuser', password='12345')
+    profile = Profile.objects.create(user=user, location='New Location', birth_date='2000-01-01')
+
+    form_data = {
+        "location": "Krasnystaw",
+        "birth_date": "2023-12-12",
+    }
+    form = ProfileUpdateForm(data=form_data, instance=profile)
+
+    # Action
+    result = form.is_valid()
+    if result:
+        form.save()
+        profile.refresh_from_db()
+
+    # Assert
+    assert result is True
+    assert profile.location == "Krasnystaw"
+    assert profile.birth_date.strftime('%Y-%m-%d') == "2023-12-12"
