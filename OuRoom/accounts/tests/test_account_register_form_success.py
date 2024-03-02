@@ -150,16 +150,16 @@ def test_profile_update_form_success():
     assert profile.birth_date.strftime('%Y-%m-%d') == "2023-12-12"
 
 @pytest.mark.django_db
-def change_password_success():
+def test_change_password_success():
+
     #Arrange
-    user = CustomUser.objects.create_user(username='testuser', password='12345')
+    user = CustomUser.objects.create_user(username='testuser', email='user@test.com', password='password')
 
-    form_data = {'new_password1': '54321', 'new_password2': '54321'}
+    form_data = {'new_password1': 'new_password', 'new_password2': 'new_password'}
 
-    form = SetPasswordForm(data=form_data, instance=user)
+    form = SetPasswordForm(user, form_data)
 
     #Action
-
     result = form.is_valid()
     if result:
         form.save()
@@ -169,16 +169,16 @@ def change_password_success():
     assert result is True
 
 @pytest.mark.django_db
-def change_password_fail():
-    #Arrange
-    user = CustomUser.objects.create_user(username='testuser', password='12345')
+def test_change_password_fail():
 
-    form_data = {'new_password1': '54321', 'new_password2': '543211'}
+    # Arrange
+    user = CustomUser.objects.create_user(username='testuser', email='user@test.com', password='password')
 
-    form = SetPasswordForm(data=form_data, instance=user)
+    form_data = {'new_password1': '1', 'new_password2': '1'}
+
+    form = SetPasswordForm(user, form_data)
 
     #Action
-
     result = form.is_valid()
     if result:
         form.save()
@@ -186,3 +186,5 @@ def change_password_fail():
 
     #Assert
     assert result is False
+
+
