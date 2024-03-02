@@ -9,10 +9,21 @@ class PostListView(ListView):
     context_object_name = 'post_list'
 
 class PostDetailView(DetailView):
+
     model = Post
 
+class PostCreateView(CreateView):
+
+    model = Post
+    fields = ['content', 'image']
+
 def main_room(request):
-    return render(request, 'rooms/mainroom.html')
+
+    context = {
+        'posts': Post.objects.all()
+    }
+
+    return render(request, 'rooms/mainroom.html', context)
 
 def ouroom(request):
     return render(request, 'rooms/ouroom.html')
