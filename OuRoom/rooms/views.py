@@ -17,10 +17,14 @@ class PostCreateView(CreateView):
     model = Post
     fields = ['content', 'image']
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
 def main_room(request):
 
     context = {
-        'posts': Post.objects.all()
+        'post_list': Post.objects.all()
     }
 
     return render(request, 'rooms/mainroom.html', context)

@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.urls import reverse
 from django.utils import timezone
 
 class Comment(models.Model):
@@ -13,8 +14,11 @@ class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     time_release = models.DateTimeField(default=timezone.now)
     content = models.TextField()
-    image = models.ImageField()
-    comment = models.ManyToManyField(Comment, blank=True)
+    image = models.ImageField(null=True, blank=True)
+
+    def get_absolute_url(self):
+        return reverse('post_detail', kwargs={'pk': self.pk})
+
 
 
 
