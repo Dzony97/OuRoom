@@ -9,7 +9,7 @@
 
 body {
   background: #1abc9c;
-  overflow: hidden;
+  overflow: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -92,15 +92,15 @@ a.button-style:hover {
   background-color: #12876f;
 }
 
-/* Base styles for all message types */
+
 .message {
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
-  background-color: #16a085; /* Base green color */
-  color: #fff; /* White text */
+  background-color: #16a085;
+  color: #fff;
   text-align: center;
-  border: 1px solid darkgreen; /* Slightly darker border for contrast */
+  border: 1px solid darkgreen;
 }
 
 .navigation {
@@ -143,7 +143,7 @@ a.button-style:hover {
   text-align: center;
   max-width: 400px;
   width: 100%;
-  margin: 20px;
+  margin-top: 200px;
   position: relative;
 }
 
@@ -179,6 +179,30 @@ a.button-style:hover {
 
 .profile-info h3, .profile-info p {
   margin: 5px 0;
+}
+
+.posts-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+  margin-top: 60px;
+  gap: 20px;
+}
+
+.media.content-section {
+  width: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-color: #16a085;
+  margin-top: 280px;
+}
+
+.media.content-section img {
+  max-width: 100%;
+  height: auto;
 }
 
 .message-info {

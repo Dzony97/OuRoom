@@ -17,7 +17,7 @@ class Post(models.Model):
     image = models.ImageField(null=True, blank=True)
 
     def get_absolute_url(self):
-        return reverse('post_detail', kwargs={'pk': self.pk})
+        return reverse('post_detail', kwargs={'pk': self.pk}) #Generate full url
 
 
 
