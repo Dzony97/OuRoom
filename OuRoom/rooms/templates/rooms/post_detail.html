@@ -1,4 +1,13 @@
 {% extends "rooms/mainroom.html" %}
 {% block content %}
 
+    <div class="posts-container">
+        <article class="media content-section">
+            <p>{{ object.author }}</p>
+            <p>{{ object.time_release|date:"F d, Y, H:i" }}</p>
+            <img src="{{ object.image }}"><p>{{ object.image }}</p> <!-- Ensure images are displayed -->
+            <p>{{ object.content }}</p>
+        </article>
+    </div>
+
 {% endblock content %}
