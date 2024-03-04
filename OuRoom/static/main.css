@@ -199,6 +199,7 @@ a.button-style:hover {
     margin-bottom: 15px;
     background-color: #fff;
     color: #333;
+    position: relative;
 }
 
 .media.content-section p {
@@ -210,6 +211,24 @@ a.button-style:hover {
     max-width: 100%;
     height: auto;
     margin-top: 10px;
+}
+
+.fa-solid.fa-trash {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 15px;
+  margin-top: 15px;
+  font-size: 25px;
+}
+
+.fa-solid.fa-info {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 60px;
+  margin-top: 15px;
+  font-size: 25px;
 }
 
 .message-info {

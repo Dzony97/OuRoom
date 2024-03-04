@@ -28,9 +28,13 @@
         <div class="posts-container">
             {% for post in post_list %}
                 <article class="media content-section">
+                    {% if post.author == user %}
+                         <a href="{% url 'post_delete' post.id %}" class="post-link"><i class="fa-solid fa-trash"></i></a>
+                    {% endif %}
+                    <a href="{{ post.get_absolute_url }}" class="post-link"><i class="fa-solid fa-info"></i></a>
                     <p>{{ post.author }}</p>
                     <p>{{ post.time_release|date:"F d, Y, H:i" }}</p>
-                    <img src="{{ post.image }}"> <!-- Ensure images are displayed -->
+                    <img src="{{ post.image }}">
                     <p>{{ post.content }}</p>
                 </article>
             {% endfor %}
