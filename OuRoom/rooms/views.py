@@ -13,7 +13,7 @@ class PostDetailView(DetailView):
 
     model = Post
 
-class PostCreateView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
 
     model = Post
     fields = ['content', 'image']
@@ -30,6 +30,21 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
     def test_func(self):
         post = self.get_object()
         return self.request.user == post.author
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+
+    model = Post
+    fields = ['content']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
 
 def main_room(request):
 
