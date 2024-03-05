@@ -217,8 +217,8 @@ a.button-style:hover {
   position: absolute;
   top: 0;
   right: 0;
-  margin-right: 15px;
-  margin-top: 15px;
+  margin-right: 10px;
+  margin-top: 10px;
   font-size: 25px;
 }
 
@@ -226,8 +226,17 @@ a.button-style:hover {
   position: absolute;
   top: 0;
   right: 0;
-  margin-right: 60px;
-  margin-top: 15px;
+  margin-right: 10px;
+  margin-top: 10px;
+  font-size: 25px;
+}
+
+.fa-solid.fa-pen {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 45px;
+  margin-top: 10px;
   font-size: 25px;
 }
 
