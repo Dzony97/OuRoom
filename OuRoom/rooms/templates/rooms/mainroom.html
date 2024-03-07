@@ -22,7 +22,21 @@
             <a href="{% url 'logout' %}" class="nav-icon" title="Wyloguj się"><i class="fa-solid fa-right-from-bracket"></i></a>
         </div>
     </nav>
+
     {% block content %}
+
+        <div class="posts-container">
+            {% for post in post_list %}
+                <article class="media content-section">
+                    <a href="{{ post.get_absolute_url }}" class="post-link"><i class="fa-solid fa-info"></i></a>
+                    <p>{{ post.author }}</p>
+                    <p>{{ post.time_release|date:"F d, Y, H:i" }}</p>
+                    <img src="{{ post.image }}">
+                    <p>{{ post.content }}</p>
+                </article>
+            {% endfor %}
+        </div>
+
     {% endblock content %}
 
 </body>
