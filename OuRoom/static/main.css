@@ -93,6 +93,24 @@ a.button-style:hover {
   background-color: #12876f;
 }
 
+.submit-style {
+  color: #fff;
+  background: #16a085;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  text-align: center;
+  display: inline-block;
+  text-decoration: none; 
+}
+
+.submit-style:hover {
+  background: #12876f;
+}
+
 
 .message {
   padding: 10px;

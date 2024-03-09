@@ -26,6 +26,7 @@
     {% block content %}
 
         <div class="posts-container">
+            <a href="{% url 'post_new' %}" class="submit-style">Dodaj post</a>
             {% for post in post_list %}
                 <article class="media content-section">
                     <a href="{{ post.get_absolute_url }}" class="post-link"><i class="fa-solid fa-info"></i></a>
