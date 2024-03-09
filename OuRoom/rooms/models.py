@@ -14,7 +14,7 @@ class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     time_release = models.DateTimeField(default=timezone.now)
     content = models.TextField()
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, upload_to='images/', height_field=None, width_field=None)
 
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'pk': self.pk}) #Generate full url

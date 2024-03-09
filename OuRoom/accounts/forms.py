@@ -3,8 +3,6 @@ from django import forms
 from .models import CustomUser, Profile
 
 
-
-#Create/Register User - Model Form
 class CreateUserForm(UserCreationForm):
 
     first_name = forms.CharField(max_length=15,
@@ -72,13 +70,12 @@ class ProfileUpdateForm(forms.ModelForm):
 
     location = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'placeholder': 'Lokalizacja'}))
 
-    birth_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date', 'placeholder': 'Data urodzenia'}))
+    birth_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
 
     class Meta:
         model = Profile
         fields = ['location', 'birth_date']
 
-#Authenticate a User - Model Form
 class LoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'id': 'username', 'placeholder': 'Login'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'id': 'password', 'placeholder': 'Hasło'}))

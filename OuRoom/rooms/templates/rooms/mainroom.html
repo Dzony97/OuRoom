@@ -29,9 +29,9 @@
             {% for post in post_list %}
                 <article class="media content-section">
                     <a href="{{ post.get_absolute_url }}" class="post-link"><i class="fa-solid fa-info"></i></a>
+                    <img src="{{ post.image.url }}">
                     <p>{{ post.author }}</p>
                     <p>{{ post.time_release|date:"F d, Y, H:i" }}</p>
-                    <img src="{{ post.image }}">
                     <p>{{ post.content }}</p>
                 </article>
             {% endfor %}
