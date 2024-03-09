@@ -31,7 +31,7 @@
                 <article class="media content-section">
                     <a href="{{ post.get_absolute_url }}" class="post-link"><i class="fa-solid fa-info"></i></a>
                     {% if post.author == user %}
-                        <p><img src="{{ post.image.url }}"></p>
+                        <p><img src="{{ post.image.url }}" class="post-image"></p>
                     {% endif %}
                     <p>{{ post.author }}</p>
                     <p>{{ post.time_release|date:"F d, Y, H:i" }}</p>

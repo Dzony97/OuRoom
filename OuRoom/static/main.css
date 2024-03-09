@@ -104,7 +104,16 @@ a.button-style:hover {
   font-size: 18px;
   text-align: center;
   display: inline-block;
-  text-decoration: none; 
+  text-decoration: none;
+}
+
+.post-image {
+  width: 600px; /* Żądana szerokość obrazu */
+  height: 400px; /* Żądana wysokość obrazu */
+  object-fit: contain; /* Zapewnia, że cały obraz będzie widoczny, zachowując proporcje, z możliwymi paskami po bokach lub na górze/dole */
+  background-color: black; /* Tło obrazu, które będzie widoczne jako "paski" */
+  display: block; /* Zapewnia, że obraz nie będzie mieć przestrzeni na dole */
+  margin: auto; /* Opcjonalnie wyśrodkowuje obraz */
 }
 
 .submit-style:hover {
