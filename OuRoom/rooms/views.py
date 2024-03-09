@@ -58,5 +58,6 @@ def ouroom(request):
 def games(request):
     return render(request, 'rooms/games.html')
 
+
 def profile(request):
     return render(request, 'rooms/profile.html')

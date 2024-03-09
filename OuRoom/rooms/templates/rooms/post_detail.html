@@ -6,10 +6,10 @@
             {% if post.author == user %}
                 <a href="{% url 'post_update' post.id %}" class="post-link"><i class="fa-solid fa-pen"></i></a>
                 <a href="{% url 'post_delete' post.id %}" class="post-link"><i class="fa-solid fa-trash"></i></a>
+                <p><img src="{{ post.image.url }}"></p>
             {% endif %}
             <p>{{ object.author }}</p>
             <p>{{ object.time_release|date:"F d, Y, H:i" }}</p>
-            <img src="{{ object.image }}"><p>{{ object.image }}</p> <!-- Ensure images are displayed -->
             <p>{{ object.content }}</p>
         </article>
     </div>
