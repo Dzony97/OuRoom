@@ -14,11 +14,14 @@ class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     time_release = models.DateTimeField(default=timezone.now)
     content = models.TextField()
-    image = models.ImageField(null=True, blank=True, upload_to='images/', height_field=None, width_field=None)
-
+    image = models.ImageField(null=True, blank=True, upload_to='images/')
+    like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='post_like', blank=True)
 
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'pk': self.pk}) #Generate full url
+
+    def total_likes(self):
+        return self.like.count()
 
 
 
