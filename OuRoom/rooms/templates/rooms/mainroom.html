@@ -27,18 +27,33 @@
 
         <div class="posts-container">
             <a href="{% url 'post_new' %}" class="submit-style">Dodaj post</a>
+
             {% for post in post_list %}
                 <article class="media content-section">
+
                     <a href="{{ post.get_absolute_url }}" class="post-link"><i class="fa-solid fa-info"></i></a>
+
                     {% if post.image %}
                         <p><img src="{{ post.image.url }}" class="post-image"></p>
                     {% endif %}
+
                     <p>{{ post.author }}</p>
                     <p>{{ post.time_release|date:"F d, Y, H:i" }}</p>
                     <p>{{ post.content }}</p>
-                    <i class="fa-solid fa-thumbs-up"></i>
-                    <i class="fa-solid fa-comment"></i>
-                    <i class="fa-solid fa-share"></i>
+
+            {% if user.is_authenticated %}
+            <form action="{% url 'post_like' object.id %}" method="POST">
+                {% csrf_token %}
+
+                {% if post_is_liked %}
+                <button type="submit" name="post_id" value="{{object.id}}"><i class="fa-regular fa-thumbs-up"></i></button>
+                {% else %}
+                <button type="submit" name="post_id" value="{{object.id}}"><i class="fa-solid fa-thumbs-up"></i></button>
+                {% endif %}
+
+            </form>
+            {% endif %}
+
                 </article>
             {% endfor %}
         </div>

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, View
 from .models import Post
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
@@ -12,6 +12,7 @@ class PostListView(ListView):
 class PostDetailView(DetailView):
 
     model = Post
+    context_object_name = 'post'
 
 class PostCreateView(LoginRequiredMixin, CreateView):
 
@@ -44,6 +45,24 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         post = self.get_object()
         return self.request.user == post.author
 
+class PostLike(LoginRequiredMixin, View):
+
+    def like_post(self, request, pk, *args, **kwargs):
+
+        post = Post.objects.get(pk=pk)
+        is_like = False
+
+        for like in post.like.all():
+            if like == request.user:
+                is_like = True
+                break
+
+        if not is_like:
+            post.like.add(request.user)
+
+        if is_like:
+            post.like.remove(request.user)
+
 def main_room(request):
 
     context = {
@@ -57,7 +76,6 @@ def ouroom(request):
 
 def games(request):
     return render(request, 'rooms/games.html')
-
 
 def profile(request):
     return render(request, 'rooms/profile.html')

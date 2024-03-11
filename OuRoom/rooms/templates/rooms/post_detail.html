@@ -3,14 +3,20 @@
 
     <div class="posts-container">
         <article class="media content-section">
+
             {% if post.author == user %}
                 <a href="{% url 'post_update' post.id %}" class="post-link"><i class="fa-solid fa-pen"></i></a>
                 <a href="{% url 'post_delete' post.id %}" class="post-link"><i class="fa-solid fa-trash"></i></a>
             {% endif %}
+
+            {% if post.image %}
             <p><img src="{{ post.image.url }}" class="post-image"></p>
+            {% endif %}
+
             <p>{{ object.author }}</p>
             <p>{{ object.time_release|date:"F d, Y, H:i" }}</p>
             <p>{{ object.content }}</p>
+
         </article>
     </div>
 
