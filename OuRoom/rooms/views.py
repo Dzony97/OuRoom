@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, View
 from .models import Post
+from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 class PostListView(ListView):
@@ -47,7 +48,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class PostLike(LoginRequiredMixin, View):
 
-    def like_post(self, request, pk, *args, **kwargs):
+    def post(self, request, pk, *args, **kwargs):
 
         post = Post.objects.get(pk=pk)
         is_like = False
@@ -62,6 +63,9 @@ class PostLike(LoginRequiredMixin, View):
 
         if is_like:
             post.like.remove(request.user)
+
+        next = request.POST.get('next', '')
+        return HttpResponseRedirect(next)
 
 def main_room(request):
 

@@ -41,18 +41,14 @@
                     <p>{{ post.time_release|date:"F d, Y, H:i" }}</p>
                     <p>{{ post.content }}</p>
 
-            {% if user.is_authenticated %}
-            <form action="{% url 'post_like' object.id %}" method="POST">
-                {% csrf_token %}
+                    <form method="POST" action="{% url 'post_like' post.pk %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.path }}">
 
-                {% if post_is_liked %}
-                <button type="submit" name="post_id" value="{{object.id}}"><i class="fa-regular fa-thumbs-up"></i></button>
-                {% else %}
-                <button type="submit" name="post_id" value="{{object.id}}"><i class="fa-solid fa-thumbs-up"></i></button>
-                {% endif %}
-
-            </form>
-            {% endif %}
+                        <button type="submit">
+                            <i class="fa-solid fa-thumbs-up"></i> <span>{{ post.like.all.count }}</span>
+                        </button>
+                    </form>
 
                 </article>
             {% endfor %}
