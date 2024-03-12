@@ -17,6 +17,15 @@
             <p>{{ object.time_release|date:"F d, Y, H:i" }}</p>
             <p>{{ object.content }}</p>
 
+            <form method="POST" action="{% url 'post_like' post.pk %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path }}">
+
+                <button type="submit">
+                    <i class="fa-solid fa-thumbs-up"></i> <span>{{ post.like.all.count }}</span>
+                </button>
+            </form>
+            
         </article>
     </div>
 
