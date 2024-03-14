@@ -1,0 +1,11 @@
+<form method="POST" action="{% url 'post_like' post.pk %}">
+  {% if is_like == True %}
+  <button type="submit" value="{{ post.pk }}">
+      <i class="fa-solid fa-thumbs-up"></i> <span>{{ post.like.all.count }}</span>
+  </button>
+  {% else %}
+  <button type="submit" value="{{ post.pk }}">
+      <i class="fa-regular fa-thumbs-up"></i> <span>{{ post.like.all.count }}</span>
+  </button>
+  {% endif %}
+</form>

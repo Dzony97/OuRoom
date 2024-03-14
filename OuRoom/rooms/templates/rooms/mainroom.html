@@ -41,13 +41,14 @@
                     <p>{{ post.time_release|date:"F d, Y, H:i" }}</p>
                     <p>{{ post.content }}</p>
 
-                    <form method="POST" action="{% url 'post_like' post.pk %}">
+                    <form method="POST" action="{% url 'post_like' post.pk %}" class="like-form" data-post-id="{{ post.pk }}">
+
                         {% csrf_token %}
                         <input type="hidden" name="next" value="{{ request.path }}">
-
-                        <button type="submit">
-                            <i class="fa-solid fa-thumbs-up"></i> <span>{{ post.like.all.count }}</span>
+                        <button type="submit" value="{{ post.pk }}">
+                            <i id="like-icon-{{ post.pk }}" class="fa-solid fa-thumbs-up"></i> <span id="like"
                         </button>
+
                     </form>
 
                 </article>
