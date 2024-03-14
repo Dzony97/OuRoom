@@ -46,7 +46,7 @@
                         {% csrf_token %}
                         <input type="hidden" name="next" value="{{ request.path }}">
                         <button type="submit" value="{{ post.pk }}">
-                            <i id="like-icon-{{ post.pk }}" class="fa-solid fa-thumbs-up"></i> <span id="like"
+                            <i id="like-icon-{{ post.pk }}" class="fa-solid fa-thumbs-up"></i> <span id="like-count-{{ post.pk }}">{{ post.like.all.count }} </span>
                         </button>
 
                     </form>
@@ -54,6 +54,42 @@
                 </article>
             {% endfor %}
         </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.like-form').forEach(form => {
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent page reload
+
+                const postId = this.dataset.postId;
+                const likeIcon = document.getElementById('like-icon-' + postId);
+                const likeCount = document.getElementById('like-count-' + postId);
+                const formData = new FormData(this);
+
+                // Fetch API to submit the form asynchronously
+                fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': formData.get('csrfmiddlewaretoken'), // This makes the request legal for django
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.liked) {
+                        likeIcon.classList.remove('fa-solid');
+                        likeIcon.classList.add('fa-regular');
+                    } else {
+                        likeIcon.classList.add('fa-solid');
+                        likeIcon.classList.remove('fa-regular');
+                    }
+                    likeCount.textContent = data.likes_count;
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    });
+    </script>
 
     {% endblock content %}
 

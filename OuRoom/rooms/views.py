@@ -48,7 +48,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class PostLike(LoginRequiredMixin, View):
 
-    def post(self, request, pk, *args, **kwargs):
+    def post(self, request, pk):
 
         post = Post.objects.get(pk=pk)
         is_like = False
