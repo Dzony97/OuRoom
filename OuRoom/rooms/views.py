@@ -51,20 +51,17 @@ class PostLike(LoginRequiredMixin, View):
     def post(self, request, pk):
 
         post = Post.objects.get(pk=pk)
-        is_like = False
+        user_liked = post.like.filter(pk=request.user.pk).exists()
 
-        for like in post.like.all():
-            if like == request.user:
-                is_like = True
-                break
 
-        if not is_like:
-            post.like.add(request.user)
-
-        if is_like:
+        if user_liked:
             post.like.remove(request.user)
+            liked = False
+        else:
+            post.like.add(request.user)
+            liked = True
             
-        return JsonResponse({'liked': is_like, 'likes_count': post.like.all().count()})
+        return JsonResponse({'liked': liked, 'likes_count': post.like.all().count()})
 
 def main_room(request):
 
