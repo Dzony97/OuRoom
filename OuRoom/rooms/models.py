@@ -23,13 +23,16 @@ class Post(models.Model):
 
 class Comment(models.Model):
 
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comments')
     content = models.TextField(max_length=200)
     time_release = models.DateTimeField(default=timezone.now)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, default='')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     
     class Meta:
         ordering = ['-time_release']
+
+    def __str__(self):
+        return f'{self.author} : {self.content}'
 
 
 
