@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, View
 from .models import Post
 from .forms import AddCommentForm
@@ -82,13 +82,9 @@ def comment_send(request, pk):
             comment.author = request.user
             comment.post = post
             comment.save()
+            return redirect('post_detail', pk=pk)
 
-    context = {
-        'post': post,
-        'comment': comment,
-    }
-
-    return render(request, 'comment/{{ pk }}', context)
+    return redirect('post_detail', pk=pk)
 
 
 
