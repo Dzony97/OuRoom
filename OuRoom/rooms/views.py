@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, View
 from .models import Post
+from .forms import AddCommentForm
 from django.http import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
@@ -14,6 +16,11 @@ class PostDetailView(DetailView):
 
     model = Post
     context_object_name = 'post'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['commentform'] = AddCommentForm()
+        return context
 
 class PostCreateView(LoginRequiredMixin, CreateView):
 
@@ -63,10 +70,35 @@ class PostLike(LoginRequiredMixin, View):
             
         return JsonResponse({'liked': liked, 'likes_count': post.like.all().count()})
 
-def main_room(request):
+
+@login_required
+def comment_send(request, pk):
+    post = get_object_or_404(Post, id=pk)
+
+    if request.method == "POST":
+        form = AddCommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False) # The objects isn't immediately saved in the database
+            comment.author = request.user
+            comment.post = post
+            comment.save()
 
     context = {
-        'post_list': Post.objects.all()
+        'post': post,
+        'comment': comment,
+    }
+
+    return render(request, 'comment/{{ pk }}', context)
+
+
+
+
+def main_room(request, pk):
+
+    post = get_object_or_404(Post, id=pk)
+
+    context = {
+        'post': post,
     }
 
     return render(request, 'rooms/mainroom.html', context)

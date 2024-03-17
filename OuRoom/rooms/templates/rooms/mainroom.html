@@ -41,13 +41,6 @@
                         <p><img src="{{ post.image.url }}" class="post-image"></p>
                     {% endif %}
 
-                    {% for comment in post.comments.all %}
-
-                        <p>{{ comment.author }}</p>
-                        <p>{{ comment.time_release }}</p>
-                        <p>{{ comment.content }}</p>
-
-                    {% endfor %}
 
                     <form method="POST" action="{% url 'post_like' post.pk %}" class="like-form" data-post-id="{{ post.pk }}">
 

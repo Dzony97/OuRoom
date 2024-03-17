@@ -30,4 +30,26 @@
         </article>
     </div>
 
+   <div class="add-comment">
+        <form method="POST"  class="comment-form">
+
+            {% csrf_token %}
+            {{ commentform.as_p }}
+
+            <button type="submit" >Submit</button>
+
+        </form>
+   </div>
+
+<div class="comments-list">
+        {% for comment in post.comments.all %}
+
+            <p>{{ comment.author }}</p>
+            <p>{{ comment.time_release }}</p>
+            <p>{{ comment.content }}</p>
+            </br>
+
+        {% endfor %}
+    </div>
+
 {% endblock content %}
