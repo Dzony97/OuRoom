@@ -31,6 +31,7 @@
     </div>
 
    <div class="add-comment">
+
         <form method="POST" action="{% url 'comment-post' post.pk%}" class="comment-form">
 
             {% csrf_token %}
@@ -43,7 +44,7 @@
 
 <div class="comments-list">
         {% for comment in post.comments.all %}
-
+            <a href="{% url 'comment_delete' comment.id %}" class="post-link" ><i class="fa-solid fa-trash"></i></a>
             <p>{{ comment.author }}</p>
             <p>{{ comment.time_release }}</p>
             <p>{{ comment.content }}</p>
