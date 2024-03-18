@@ -93,9 +93,9 @@ def comment_delete(request, pk):
 
     if request.method == 'POST':
         comment.delete()
-        return redirect('comment', comment.post.id)
+        return redirect('post_detail', comment.post.id)
 
-    return render(request, 'rooms/comment_confirm_delete.html', {'comment': comment})
+    return render(request, 'rooms/comment_delete.html', {'comment': comment})
 
 def main_room(request, pk):
 

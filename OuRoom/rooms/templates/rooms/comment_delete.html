@@ -1,0 +1,12 @@
+{% extends "accounts/welcome.html" %}
+
+{% block content %}
+
+  <h2>Czy na pewno chcesz usunąć ten komentarz?</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <button type="submit">Tak, usuń ten komentarz</button>
+    <a href="{{ request.META.HTTP_REFERER }}">Nie, wróć do posta</a>
+  </form>
+
+{% endblock %}
