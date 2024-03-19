@@ -42,7 +42,7 @@
         </form>
    </div>
 
-<div class="comments-list">
+    <div class="comments-list">
         {% for comment in post.comments.all %}
             {% if user.is_authenticated and comment.author == user %}
             <a href="{% url 'comment_delete' comment.id %}">Delete<</a>

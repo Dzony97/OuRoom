@@ -70,7 +70,6 @@ class PostLike(LoginRequiredMixin, View):
             
         return JsonResponse({'liked': liked, 'likes_count': post.like.all().count()})
 
-
 @login_required
 def comment_send(request, pk):
     post = get_object_or_404(Post, id=pk)

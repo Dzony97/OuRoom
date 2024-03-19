@@ -41,6 +41,13 @@
                         <p><img src="{{ post.image.url }}" class="post-image"></p>
                     {% endif %}
 
+                    {% if post.comments.count %}
+                        {{ post.comments.count }}
+                    {% else %}
+                        {% if user.is_authenticated %}
+                            Add comment button
+                        {% endif %}
+                    {% endif %}
 
                     <form method="POST" action="{% url 'post_like' post.pk %}" class="like-form" data-post-id="{{ post.pk }}">
 
