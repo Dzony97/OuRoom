@@ -45,7 +45,7 @@
                         {{ post.comments.count }}
                     {% else %}
                         {% if user.is_authenticated %}
-                            Add comment button
+                            <a href="{% url 'post_detail' post.pk %}">Dodaj komentarz</a>
                         {% endif %}
                     {% endif %}
 

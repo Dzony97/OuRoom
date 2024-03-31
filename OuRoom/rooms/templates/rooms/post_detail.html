@@ -44,15 +44,18 @@
 
     <div class="comments-list">
         {% for comment in post.comments.all %}
-            {% if user.is_authenticated and comment.author == user %}
-            <a href="{% url 'comment_delete' comment.id %}">Delete<</a>
-            {% endif %}
-            <p>{{ comment.author }}</p>
-            <p>{{ comment.time_release }}</p>
-            <p>{{ comment.content }}</p>
-            </br>
-
+            <div class="comment-item">
+                <div class="comment-author-time">
+                    <span>{{ comment.author }}</span>
+                    <span>{{ comment.time_release }}</span>
+                    <a href="{% url 'comment_delete' comment.id %}"><i class="fa-solid fa-delete-left"></i></a>
+                </div>
+                <div class="comment-content">
+                    <p>{{ comment.content }}</p>
+                </div>
+            </div>
         {% endfor %}
     </div>
+
 
 {% endblock content %}
