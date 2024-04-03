@@ -46,8 +46,7 @@
         {% for comment in post.comments.all %}
             <div class="comment-item">
                 <div class="comment-author-time">
-                    <span>{{ comment.author }}</span>
-                    <span>{{ comment.time_release }}</span>
+                    <a>{{ comment.author }} {{ comment.time_release }}</a>
                     <a href="{% url 'comment_delete' comment.id %}"><i class="fa-solid fa-delete-left"></i></a>
                 </div>
                 <div class="comment-content">

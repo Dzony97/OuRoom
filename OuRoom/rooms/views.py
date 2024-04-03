@@ -106,9 +106,11 @@ def main_room(request, pk):
 
     return render(request, 'rooms/mainroom.html', context)
 
+@login_required
 def ouroom(request):
     return render(request, 'rooms/ouroom.html')
 
+@login_required
 def games(request):
     return render(request, 'rooms/games.html')
 
