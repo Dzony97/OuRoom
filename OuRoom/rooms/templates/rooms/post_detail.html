@@ -55,6 +55,22 @@
                     <p>{{ comment.content }}</p>
                 </div>
             </div>
+
+            <div class="comment-replies">
+                {% for reply in comment.comment_reply.all %}
+                    <div class="reply-item">
+                        <div class="reply-author-time">
+                            <span>{{ reply.author }}</span>
+                            <span>{{ reply.time_release }}</span>
+                        </div>
+                        <div class="reply-content">
+                            <p>{{ reply.content }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
         {% endfor %}
     </div>
 

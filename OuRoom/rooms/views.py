@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, View
 from .models import Post, Comment
-from .forms import AddCommentForm
+from .forms import AddCommentForm, AddCommentReplyForm
 from django.http import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
@@ -95,6 +95,21 @@ def comment_delete(request, pk):
         return redirect('post_detail', comment.post.id)
 
     return render(request, 'rooms/comment_delete.html', {'comment': comment})
+
+@login_required
+def comment_reply_send(request, pk):
+    comment = get_object_or_404(Comment, id=pk)
+
+    if request.method == "POST":
+        form = AddCommentReplyForm(request.POST)
+        if form.is_valid():
+            comment_reply = form.save(commit=False)
+            comment_reply.author = request.user
+            comment_reply.comment = comment
+            comment_reply.save()
+            return redirect('post_detail', pk=pk)
+
+    return redirect('post_detail', pk=pk)
 
 def main_room(request, pk):
 
