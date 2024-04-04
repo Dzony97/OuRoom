@@ -34,6 +34,21 @@ class Comment(models.Model):
     def __str__(self):
         return f'{self.author} : {self.content}'
 
+class CommentReply(models.Model):
+
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comment_reply')
+    content = models.TextField(max_length=100)
+    time_release = models.DateTimeField(default=timezone.now)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='comment_reply')
+
+    class Meta:
+        ordering = ['-time_release']
+
+    def __str__(self):
+        return f'{self.author} : {self.content}'
+
+
+
 
 
 
