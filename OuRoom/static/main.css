@@ -312,9 +312,51 @@ a.button-style:hover {
   word-wrap: break-word;
 }
 
+.comment-replies {
+    background-color: #eef2f3; /* Jasniejsze tło dla odpowiedzi niż dla komentarzy */
+    margin-left: 20px; /* Lekkie przesunięcie odpowiedzi do wewnątrz */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.reply-item {
+    font-size: 0.85em;
+    border-radius: 4px;
+    border: 2px solid #dee2e6;
+}
+
+.add-comment-reply form {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f8f9fa; /* Tło formularza */
+    border: 1px solid #dee2e6; /* Delikatna obramówka */
+    border-radius: 5px;
+}
+
+.add-comment-reply input[type="text"], .add-comment-reply textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.add-comment-reply input[type="submit"] {
+    background-color: #1abc9c; /* Dostosowanie do koloru tła */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-comment-reply input[type="submit"]:hover {
+    background-color: #16a085;
+}
 
 .comment-content {
-  margin-top: 10px; /* Przestrzeń między metadanymi a treścią komentarza */
+  margin-top: 10px;
 }
 
 .message-info {
