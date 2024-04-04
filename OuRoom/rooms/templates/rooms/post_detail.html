@@ -55,6 +55,14 @@
                     <p>{{ comment.content }}</p>
                 </div>
             </div>
+            <div class="add-comment-reply">
+                <form method="POST" action="{% url 'comment_reply' comment.pk %}" class="comment_reply_form">
+
+                    {% csrf_token %}
+                    {{ commentreplyform.as_p }}
+
+                </form>
+            </div>
 
             <div class="comment-replies">
                 {% for reply in comment.comment_reply.all %}
