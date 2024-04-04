@@ -27,7 +27,7 @@ class Comment(models.Model):
     content = models.TextField(max_length=200)
     time_release = models.DateTimeField(default=timezone.now)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    
+
     class Meta:
         ordering = ['-time_release']
 

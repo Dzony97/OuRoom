@@ -72,6 +72,7 @@
                         <div class="reply-author-time">
                             <span>{{ reply.author }}</span>
                             <span>{{ reply.time_release }}</span>
+                            <a href="{% url 'comment_reply_delete' reply.id %}"><i class="fa-solid fa-delete-left"></i></a>
                         </div>
                         <div class="reply-content">
                             <p>{{ reply.content }}</p>

@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import PostListView, PostDetailView, PostCreateView, PostDeleteView, PostUpdateView, PostLike, comment_send, comment_delete, comment_reply_send
+from .views import PostListView, PostDetailView, PostCreateView, PostDeleteView, PostUpdateView, PostLike, comment_send, comment_delete, comment_reply_send, comment_reply_delete
 
 urlpatterns = [
     path('', PostListView.as_view(), name='main_room'),
@@ -14,6 +14,7 @@ urlpatterns = [
     path('comment/<int:pk>', comment_send, name='comment_post'),
     path('comment/<int:pk>/delete', comment_delete, name='comment_delete'),
     path('comment/<int:pk>/reply', comment_reply_send, name='comment_reply'),
+    path('comment/<int:pk>/reply/delete', comment_reply_delete, name='comment_reply_delete'),
     path('ouroom/', views.ouroom, name='ouroom'),
     path('games/', views.games, name='games'),
 ]
