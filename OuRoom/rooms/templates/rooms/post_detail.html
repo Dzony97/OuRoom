@@ -49,13 +49,15 @@
                 <div class="comment-author-time">
                     <span>{{ comment.author }}</span>
                     <span>{{ comment.time_release }}</span>
+                    {% if comment.author == user %}
                     <a href="{% url 'comment_delete' comment.id %}"><i class="fa-solid fa-delete-left"></i></a>
+                    {% endif %}
                 </div>
                 <div class="comment-content">
                     <p>{{ comment.content }}</p>
                 </div>
                 <div class="add-comment-reply">
-                    <form method="POST" action="{% url 'comment_reply' comment.pk %}" class="comment_reply_form">
+                    <form method="POST" action="{% url 'comment_reply' comment.pk %}" class="comment-reply-form">
 
                         {% csrf_token %}
                         {{ commentreplyform.as_p }}

@@ -108,9 +108,9 @@ def comment_reply_send(request, pk):
             comment_reply.author = request.user
             comment_reply.comment = comment
             comment_reply.save()
-            return redirect('post_detail', pk=pk)
+            return redirect('post_detail', pk=comment.post.pk)
 
-    return redirect('post_detail', pk=pk)
+    return redirect('post_detail', pk=comment.post.pk)
 
 @login_required
 def comment_reply_delete(request, pk):
