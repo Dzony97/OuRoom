@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
     path('', include('rooms.urls')),
+    path('', include('games.urls')),
 ]
 
 # Ensures that Django will only serve static files and media during development.
