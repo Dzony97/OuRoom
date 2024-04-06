@@ -22,7 +22,7 @@
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ request.path }}">
                 <button type="submit" value="{{ post.pk }}">
-                    <i id="like-icon-{{ post.pk }}" class="{% if request.user in post.like.all %}fa-regular{% else %}fa-solid{% endif %} fa-thumbs-up"></i><span id="like-count-{{ post.pk }}">{{ post.like.all.count }} </span>
+                    <i id="like-icon-{{ post.pk }}" class="{% if request.user in post.like.all %}fa-regular{% else %}fa-solid{% endif %} fa-thumbs-up"><span id="like-count-{{ post.pk }}">{{ post.like.all.count }} </span></i>
                 </button>
 
                 {% if post.comments.count %}
@@ -32,9 +32,6 @@
                         <a href="{% url 'post_detail' post.pk %}"><i class="fa-solid fa-comment-medical"></i></a>
                     {% endif %}
                 {% endif %}
-
-                <i class="fa-regular fa-share-from-square"></i>
-                <i class="fa-solid fa-share-from-square"></i>
 
             </form>
 

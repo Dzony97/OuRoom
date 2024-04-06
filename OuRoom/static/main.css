@@ -380,6 +380,22 @@ a.button-style:hover {
     border-right: none;
 }
 
+/* Adjusting the size of the like count */
+#like-count-{{ post.pk }} {
+    font-size: 1rem; /* Adjust the size as needed */
+}
+
+/* Adjusting the size of the comment count */
+.fa-comment, .fa-comment-medical {
+    font-size: 1rem; /* Ensure this matches the like count for consistency */
+}
+
+/* Optional: Adjust the size of icons if needed for better visual alignment */
+.fa-thumbs-up, .fa-regular, .fa-solid, .fa-comment-medical {
+    font-size: 1.2rem; /* Adjust based on preference */
+}
+
+
 .comment-content {
   margin-top: 10px;
 }
