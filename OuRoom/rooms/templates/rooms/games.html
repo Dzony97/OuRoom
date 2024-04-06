@@ -2,6 +2,11 @@
 
 
 {% block content %}
-    <h1>Games</h1>
+    <h1>Gry</h1>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 620px; margin-top: 20px;">
+        <a href="{% url 'snake' %}" class="button-style" style="flex-basis: calc(50% - 10px); text-align: center;">Snake</a>
+        <a href="{% url 'paper' %}" class="button-style" style="flex-basis: calc(50% - 10px); text-align: center;">Papier kamień i nożyce</a>
+    </div>
+
 
 {% endblock content %}
