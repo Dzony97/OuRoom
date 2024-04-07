@@ -18,6 +18,8 @@ body {
     min-height: 100vh;
 }
 
+
+
 ::selection {
   background: rgba(26, 188, 156, 0.3);
 }
@@ -395,6 +397,9 @@ a.button-style:hover {
     font-size: 1.2rem; /* Adjust based on preference */
 }
 
+.game {
+  border: 4px solid #000; /* Gruba czarna ramka */
+}
 
 .comment-content {
   margin-top: 10px;
