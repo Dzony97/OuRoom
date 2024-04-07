@@ -3,6 +3,8 @@ const context = canvas.getContext('2d'); // 2D rendering context
 
 const grid = 16;
 let count = 0;
+let score = 0;
+let oldScore = 0;
 
 const snake = {
   x: 160,
@@ -58,6 +60,8 @@ function loop() {
     // Checking if the snake ate the point
     if (cell.x === apple.x && cell.y === apple.y) {
       snake.maxCells++;
+      score++;
+      document.getElementById('score').innerText = 'Wynik: ' + score;
       apple.x = getRandomInt(0, 25) * grid;
       apple.y = getRandomInt(0, 25) * grid;
     }
@@ -80,6 +84,10 @@ function resetGame() {
   snake.dy = 0;
   apple.x = getRandomInt(0, 25) * grid;
   apple.y = getRandomInt(0, 25) * grid;
+  oldScore = score
+  document.getElementById('oldscore').innerText = 'Poprzedni wynik: ' + oldScore
+  score = 0;
+  document.getElementById('score').innerText = 'Wynik: 0';
 }
 
 
