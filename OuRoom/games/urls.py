@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('games/snake', views.snake, name='snake'),
+    path('submit-score/', views.submit_score, name='submit-score'),
 ]
 
 if settings.DEBUG:

@@ -8,4 +8,14 @@
 <p id="score">Wynik: 0</p>
 <p id="oldscore">Poprzedni wynik: 0</p>
 
+
+<p>Ranking:</p>
+<ol>
+{% for score in scores  %}
+
+    <li>{{ score.player_username }} : {{ score.point }}</li>
+
+{% endfor %}
+</ol>
+
 {% endblock %}
