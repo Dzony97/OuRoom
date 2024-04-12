@@ -74,7 +74,6 @@ function loop() {
   });
 }
 
-
 function resetGame() {
   snake.x = 160;
   snake.y = 160;
@@ -89,7 +88,6 @@ function resetGame() {
   score = 0;
   document.getElementById('score').innerText = 'Wynik: 0';
 }
-
 
 document.addEventListener('keydown', (e) => {
 
@@ -109,42 +107,3 @@ document.addEventListener('keydown', (e) => {
 });
 
 requestAnimationFrame(loop);
-
-function submitScore(score) {
-  // fetch to send score
-  fetch('/submit-score/', { // The URL to change to the correct endpoint in Django
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRFToken': getCookie('csrftoken') // Required to Django to prevent CSRF attacks
-    },
-    body: JSON.stringify({
-      score: score
-    })
-  })
-  .then(response => {
-    if (response.ok) {
-      return response.json();
-    }
-    throw new Error('Nie udało się zapisywać wyniku.');
-  })
-  .then(data => console.log('Wynik został zapisany:', data))
-  .catch((error) => console.error('Błąd:', error));
-}
-
-function getCookie(name) {
-  let cookieValue = null;
-  if (document.cookie && document.cookie !== '') {
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      if (cookie.substring(0, name.length + 1) === (name + '=')) {
-        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-        break;
-      }
-    }
-  }
-  return cookieValue;
-}
-
-
