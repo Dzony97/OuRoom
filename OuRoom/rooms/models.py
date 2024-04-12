@@ -21,6 +21,17 @@ class Post(models.Model):
     def total_likes(self):
         return self.like.count()
 
+class Group(models.Model):
+
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='creator_group', on_delete=models.CASCADE)
+    name = models.TextField(max_length=50)
+    description = models.TextField(max_length=500)
+    users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='users_group')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='groups')
+
+    def __str__(self):
+        return self.name
+
 class Comment(models.Model):
 
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comments')
