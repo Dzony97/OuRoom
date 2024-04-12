@@ -137,6 +137,9 @@ def main_room(request, pk):
 def ouroom(request):
     return render(request, 'rooms/ouroom.html')
 
+def create_group(request):
+    pass
+
 @login_required
 def games(request):
     return render(request, 'rooms/games.html')

@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 
-from .models import Comment, CommentReply
+from .models import Comment, CommentReply, Group
 
 class AddCommentForm(ModelForm):
 
@@ -30,3 +30,17 @@ class AddCommentReplyForm(ModelForm):
         labels = {
             'content': ''
         }
+
+class CreateGroup(ModelForm):
+
+    class Meta:
+        model = Group
+        fields = ['name', 'description']
+
+    widgets = {
+        'content': forms.TextInput(attrs={'placeholder': 'Opis ...'})
+    }
+
+    labels = {
+        'content': ''
+    }
