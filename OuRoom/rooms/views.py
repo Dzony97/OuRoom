@@ -71,6 +71,26 @@ class PostLike(LoginRequiredMixin, View):
             
         return JsonResponse({'liked': liked, 'likes_count': post.like.all().count()})
 
+class GroupListView(ListView):
+
+    model = Group
+    template_name = 'rooms/ouroom.html'
+    context_object_name = 'group_list'
+
+class GroupCreateView(LoginRequiredMixin, CreateView):
+
+    model = Group
+    fields = ['name', 'description']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+class GroupDetailView(DetailView):
+
+    model = Group
+    context_object_name = 'group'
+
 @login_required
 def comment_send(request, pk):
     post = get_object_or_404(Post, id=pk)
@@ -134,8 +154,15 @@ def main_room(request, pk):
     return render(request, 'rooms/mainroom.html', context)
 
 @login_required
-def ouroom(request):
-    return render(request, 'rooms/ouroom.html')
+def ouroom(request, pk):
+
+    group = get_object_or_404(Group, id=pk)
+
+    context = {
+        'group': group,
+    }
+
+    return render(request, 'rooms/ouroom.html', context)
 
 @login_required
 def games(request):
