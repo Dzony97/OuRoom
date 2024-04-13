@@ -31,16 +31,3 @@ class AddCommentReplyForm(ModelForm):
             'content': ''
         }
 
-class CreateGroup(ModelForm):
-
-    class Meta:
-        model = Group
-        fields = ['name', 'description']
-
-    widgets = {
-        'content': forms.TextInput(attrs={'placeholder': 'Opis ...'})
-    }
-
-    labels = {
-        'content': ''
-    }

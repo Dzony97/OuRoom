@@ -16,6 +16,7 @@ urlpatterns = [
     path('comment/<int:pk>/reply', comment_reply_send, name='comment_reply'),
     path('comment/<int:pk>/reply/delete', comment_reply_delete, name='comment_reply_delete'),
     path('ouroom/', views.ouroom, name='ouroom'),
+    #path('ouroom/<int:pk>', views.group, name='group'),
     path('ouroom/create', views.create_group, name='create_group'),
     path('games/', views.games, name='games'),
 ]
