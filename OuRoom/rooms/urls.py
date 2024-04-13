@@ -16,7 +16,7 @@ urlpatterns = [
     path('comment/<int:pk>/reply/delete', views.comment_reply_delete, name='comment_reply_delete'),
     path('ouroom/', views.GroupListView.as_view(), name='ouroom'),
     path('ouroom/create', views.GroupCreateView.as_view(), name='create_group'),
-    path('ouroom/<int:pk>', views.PostDetailView.as_view(), name='group_detail'),
+    path('ouroom/group/<int:pk>', views.GroupDetailView.as_view(), name='group_detail'),
     path('games/', views.games, name='games'),
 ]
 
