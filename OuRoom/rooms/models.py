@@ -27,10 +27,12 @@ class Group(models.Model):
     name = models.TextField(max_length=50)
     description = models.TextField(max_length=500, blank=True)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='users_group')
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='groups')
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('group_detail', kwargs={'pk': self.pk})
 
 class Comment(models.Model):
 
