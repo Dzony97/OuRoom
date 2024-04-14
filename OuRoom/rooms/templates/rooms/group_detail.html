@@ -1,6 +1,25 @@
 {% extends "rooms/mainroom.html" %}
 {% block content %}
 
-<h1>Group Detail</h1>
+<h1>{{ object.name }}</h1>
+
+<div class="container">
+
+    <div class="left-container">
+        <h3>Członkowie grupy</h3>
+    </div>
+
+    <div class="center-container">
+        <a href="{% url 'post_new' %}" class="submit-style">Dodaj post</a>
+    </div>
+
+    <div class="right-container">
+        {% if object.description %}
+            <h3>Opis grupy</h3>
+            <p>{{ object.description }}</p>
+        {% endif %}
+    </div>
+
+</div>
 
 {% endblock content %}

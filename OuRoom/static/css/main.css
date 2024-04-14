@@ -18,8 +18,6 @@ body {
     min-height: 100vh;
 }
 
-
-
 ::selection {
   background: rgba(26, 188, 156, 0.3);
 }
@@ -400,6 +398,39 @@ a.button-style:hover {
 .game {
   border: 4px solid #000; /* Gruba czarna ramka */
 }
+
+
+
+.container {
+    display: flex;              /* Ustawienie flexboxa */
+    justify-content: space-between; /* Rozmieszcza elementy równomiernie w kontenerze */
+    width: 100%;                /* Szerokość kontenera na całą szerokość strony */
+}
+
+.left-container, .right-container {
+    flex: 1;                   /* Każdy z bocznych divów zajmuje 25% */
+    padding: 20px;             /* Dodanie odstępów wewnątrz każdego diva */
+}
+
+.center-container {
+    flex: 2;                   /* Środkowy div zajmuje 50% */
+    padding: 20px;             /* Dodanie odstępów wewnątrz diva */
+}
+
+.left-container {
+    text-align: center;
+    border: 2px solid #16a085;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.right-container {
+    text-align: center;
+    border: 2px solid #16a085;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 
 .comment-content {
   margin-top: 10px;
