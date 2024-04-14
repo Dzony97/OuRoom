@@ -26,13 +26,22 @@ class Group(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='creator_group', on_delete=models.CASCADE)
     name = models.TextField(max_length=50)
     description = models.TextField(max_length=500, blank=True)
-    users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='users_group')
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('group_detail', kwargs={'pk': self.pk})
+
+class GroupMembers(models.Model):
+
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='membership')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='group_membership')
+    role = models.TextField(max_length=30, default='Członek grupy')
+    time_release = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f'{self.user.username} należy do {self.group.name}'
 
 class Comment(models.Model):
 
