@@ -7,10 +7,10 @@
 
     <div class="left-container">
         <h3>Członkowie grupy</h3>
+        <p>{{ object.author }} ( Założyciel )</p>
         <li>
-            {{ object.author }} ( Założyciel )
-            {% for member in object %}
-                {{ member.user.username }} ( Członek )
+            {% for member in members %}
+                {{ member.user.username }} ( {{ member.role }} )
             {% endfor %}
         </li>
     </div>

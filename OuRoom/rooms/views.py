@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, View
-from .models import Post, Comment, CommentReply, Group
+from .models import Post, Comment, CommentReply, Group, GroupMembers
 from .forms import AddCommentForm, AddCommentReplyForm
 from django.http import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -90,6 +90,11 @@ class GroupDetailView(DetailView):
 
     model = Group
     context_object_name = 'group'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['members'] = GroupMembers.objects.filter(group=self.object) #Download all members
+        return context
 
 @login_required
 def comment_send(request, pk):
