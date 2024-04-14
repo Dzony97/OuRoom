@@ -399,22 +399,19 @@ a.button-style:hover {
   border: 4px solid #000; /* Gruba czarna ramka */
 }
 
-
-
 .container {
-    display: flex;              /* Ustawienie flexboxa */
-    justify-content: space-between; /* Rozmieszcza elementy równomiernie w kontenerze */
-    width: 100%;                /* Szerokość kontenera na całą szerokość strony */
-}
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 
 .left-container, .right-container {
-    flex: 1;                   /* Każdy z bocznych divów zajmuje 25% */
-    padding: 20px;             /* Dodanie odstępów wewnątrz każdego diva */
+    flex: 1;
+    padding: 20px;
 }
 
 .center-container {
-    flex: 2;                   /* Środkowy div zajmuje 50% */
-    padding: 20px;             /* Dodanie odstępów wewnątrz diva */
+    flex: 2;
+    padding: 20px;
 }
 
 .left-container {
@@ -430,7 +427,6 @@ a.button-style:hover {
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 
 .comment-content {
   margin-top: 10px;

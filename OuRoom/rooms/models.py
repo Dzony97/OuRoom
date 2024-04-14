@@ -25,7 +25,7 @@ class Group(models.Model):
 
     author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='creator_group', on_delete=models.CASCADE)
     name = models.TextField(max_length=50)
-    description = models.TextField(max_length=500, blank=True)
+    description = models.TextField(max_length=500)
 
     def __str__(self):
         return self.name
