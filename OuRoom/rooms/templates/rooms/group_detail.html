@@ -8,15 +8,15 @@
     <div class="left-container">
         <h3>Członkowie grupy</h3>
         <p>{{ object.author }} ( Założyciel )</p>
-        <li>
-            {% for member in members %}
-                {{ member.user.username }} ( {{ member.role }} )
-            {% endfor %}
-        </li>
-    </div>
-    {% if object.author == user %}
 
-    {% endif %}
+        {% for member in members %}
+            <li>
+            {{ member.user.username }} ( {{ member.role }} )
+            </li>
+        {% endfor %}
+
+    </div>
+
 
     <div class="center-container">
         <a href="{% url 'post_new' %}" class="submit-style">Dodaj post</a>
@@ -31,5 +31,15 @@
     </div>
 
 </div>
+
+{% if object.author == user %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Dodaj członka</button>
+    </form>
+
+{% endif %}
 
 {% endblock content %}
