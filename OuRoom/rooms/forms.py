@@ -42,6 +42,6 @@ class AddGroupMemberForm(ModelForm):
         super().__init__(*args, **kwargs)
         if group_id:
             User = get_user_model()
-            self.fields['user'].queryset = User.objects.exclude(groupmembership__group_id=group_id) #Preventing the same user from being added
+            self.fields['user'].queryset = User.objects.exclude(group_membership__group_id=group_id) #Preventing the same user from being added
 
 

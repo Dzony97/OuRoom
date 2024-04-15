@@ -90,12 +90,23 @@ class GroupDetailView(DetailView):
 
     model = Group
     context_object_name = 'group'
-    form_class = AddGroupMemberForm
+    template_name = 'rooms/group_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['form'] = AddGroupMemberForm(group_id=self.object.id)
         context['members'] = GroupMembers.objects.filter(group=self.object) #Download all members
         return context
+
+    def post(self, request, *args, **kwargs):
+        form = AddGroupMemberForm(request.POST, group_id=self.object.id)
+        if form.is_valid():
+            new_member = form.save(commit=False)
+            new_member.group = self.get_object()
+            new_member.save()
+            return redirect(self.get_object().get_absolute_url())
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
 
 @login_required
 def comment_send(request, pk):
