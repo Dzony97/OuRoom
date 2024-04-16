@@ -91,7 +91,13 @@ class GroupDetailView(DetailView):
     model = Group
     context_object_name = 'group'
     template_name = 'rooms/group_detail.html'
+    pk_url_kwarg = 'group_id'
 
+    def get_object(self, queryset=None):
+
+        group_id = self.kwargs.get(self.pk_url_kwarg)
+        self.object = get_object_or_404(Group, id=group_id)
+        return self.object
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = AddGroupMemberForm(group_id=self.object.id)
@@ -99,6 +105,7 @@ class GroupDetailView(DetailView):
         return context
 
     def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
         form = AddGroupMemberForm(request.POST, group_id=self.object.id)
         if form.is_valid():
             new_member = form.save(commit=False)
