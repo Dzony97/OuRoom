@@ -31,7 +31,7 @@ class Group(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('group_detail', kwargs={'pk': self.pk})
+        return reverse('group_detail', kwargs={'group_id': self.id})
 
 class GroupMembers(models.Model):
 
