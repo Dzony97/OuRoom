@@ -18,6 +18,7 @@ urlpatterns = [
     path('ouroom/create', views.GroupCreateView.as_view(), name='create_group'),
     path('ouroom/group/<int:group_id>', views.GroupDetailView.as_view(), name='group_detail'),
     path('ouroom/group/<int:pk>/delete', views.GroupDeleteView.as_view(), name='group_delete'),
+    path('ouroom/group/<int:pk>/update', views.GroupUpdateView.as_view(), name='group_update'),
     path('games/', views.games, name='games'),
 ]
 

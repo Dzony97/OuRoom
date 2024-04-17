@@ -132,6 +132,18 @@ class GroupDeleteView(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
         group = self.get_object()
         return self.request.user == group.author
 
+class GroupUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Group
+    fields = ['name', 'description']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):  # checks whether the current user is the author of this event
+        group = self.get_object()
+        return self.request.user == group.author
+
 @login_required
 def comment_send(request, pk):
     post = get_object_or_404(Post, id=pk)
