@@ -24,8 +24,8 @@
             </form>
         </div>
         {% endif %}
-    </div>
 
+    </div>
 
 
     <div class="center-container">
@@ -38,7 +38,17 @@
             <h3>Opis grupy</h3>
             <p>{{ object.description }}</p>
         {% endif %}
+
+    {% if object.author == user %}
+        <div class="right-down" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 620px; max-height: 100px; margin-top: 20px;">
+            <a href="{% url 'group_delete' group.pk %}" class="button-style" style="flex-basis: calc(50% - 10px); text-align: center;">Usuń grupe</a>
+            <a href="{% url 'group_update' group.pk %}" class="button-style" style="flex-basis: calc(50% - 10px); text-align: center;">Zaktualizuj grupe</a>
+        </div>
+    {% endif %}
+
+
     </div>
+
 
 </div>
 
