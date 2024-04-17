@@ -5,6 +5,7 @@ from .models import Post, Comment, CommentReply, Group, GroupMembers
 from .forms import AddCommentForm, AddCommentReplyForm, AddGroupMemberForm
 from django.http import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db.models import Q
 
 class PostListView(ListView):
 
@@ -78,7 +79,11 @@ class GroupListView(ListView):
     context_object_name = 'group_list'
 
     def get_queryset(self):
-        return Group.objects.filter(membership__user=self.request.user)
+
+        user = self.request.user
+
+        return Group.objects.filter(Q(membership__user=user) | Q(author=user)).distinct()
+        # Q = allows to combine conditions. Show groups in which you are a member of founder
 
 class GroupCreateView(LoginRequiredMixin, CreateView):
 
