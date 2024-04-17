@@ -5,6 +5,7 @@
     <h1>OurRoom</h1>
     <a href="{% url 'create_group' %}"  class="submit-style">Stwórz grupe</a>
 
+
     <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 620px; margin-top: 20px;">
         {% for group in group_list %}
             <a href="{% url 'group_detail' group.pk %}" class="button-style" style="flex-basis: calc(50% - 10px); text-align: center;">{{ group.name }}</a>
