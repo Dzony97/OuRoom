@@ -1,0 +1,9 @@
+{% extends "rooms/mainroom.html" %}
+{% block content %}
+  <h2>Czy na pewno chcesz usunąć tą grupe?</h2>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Tak, usuń tą grupe</button>
+    <a href="{{ post.get_absolute_url }}">Nie, wróć do grupy</a>
+  </form>
+{% endblock %}

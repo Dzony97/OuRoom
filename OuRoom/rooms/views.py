@@ -123,6 +123,15 @@ class GroupDetailView(DetailView):
         else:
             return self.render_to_response(self.get_context_data(form=form))
 
+class GroupDeleteView(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
+
+    model = Group
+    success_url = '/'
+
+    def test_func(self):
+        group = self.get_object()
+        return self.request.user == group.author
+
 @login_required
 def comment_send(request, pk):
     post = get_object_or_404(Post, id=pk)
