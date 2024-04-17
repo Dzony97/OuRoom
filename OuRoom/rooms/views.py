@@ -77,6 +77,9 @@ class GroupListView(ListView):
     template_name = 'rooms/ouroom.html'
     context_object_name = 'group_list'
 
+    def get_queryset(self):
+        return Group.objects.filter(membership__user=self.request.user)
+
 class GroupCreateView(LoginRequiredMixin, CreateView):
 
     model = Group

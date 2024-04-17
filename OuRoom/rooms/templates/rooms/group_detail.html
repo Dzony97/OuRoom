@@ -15,7 +15,17 @@
             </li>
         {% endfor %}
 
+        {% if object.author == user %}
+        <div class="form-container">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Dodaj członka</button>
+            </form>
+        </div>
+        {% endif %}
     </div>
+
 
 
     <div class="center-container">
@@ -32,13 +42,7 @@
 
 </div>
 
-{% if object.author == user %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Dodaj członka</button>
-</form>
-{% endif %}
+
 
 
 
