@@ -1,9 +1,10 @@
 from django.contrib.auth.decorators import login_required
+from django.core.checks import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, View
 from .models import Post, Comment, CommentReply, Group, GroupMembers
 from .forms import AddCommentForm, AddCommentReplyForm, AddGroupMemberForm
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
 
@@ -143,6 +144,18 @@ class GroupUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):  # checks whether the current user is the author of this event
         group = self.get_object()
         return self.request.user == group.author
+
+def member_delete(request, group_id, member_id ):
+
+    group = get_object_or_404(Group, id=group_id)
+    member = get_object_or_404(GroupMembers, id=member_id, group=group)
+
+    if request.user == member.user or request.user == group.author:
+        if request.method == 'POST':
+            member.delete()
+            return redirect('group_detail', group_id=group_id)
+
+    return render(request, 'rooms/member_delete.html', {'member': member})
 
 @login_required
 def comment_send(request, pk):

@@ -11,8 +11,7 @@
 
         {% for member in members %}
             <li>
-            {{ member.user.username }} ( {{ member.role }} )
-            </li>
+            {{ member.user.username }} ( {{ member.role }} ) {% if request.user == member.user or request.user == group.author %} <a href="{% url 'member_delete' group.id member.id %}"><i class="fa fa-trash"></i></a> {% endif %}
         {% endfor %}
 
         {% if object.author == user %}

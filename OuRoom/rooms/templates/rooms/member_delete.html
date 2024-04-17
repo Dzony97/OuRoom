@@ -1,0 +1,12 @@
+{% extends "accounts/welcome.html" %}
+
+{% block content %}
+
+  <h2>Czy na pewno chcesz usunąć członka grupy?</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <button type="submit">Tak</button>
+    <a href="{{ request.META.HTTP_REFERER }}">Nie, wróć do grupy</a>
+  </form>
+
+{% endblock %}
