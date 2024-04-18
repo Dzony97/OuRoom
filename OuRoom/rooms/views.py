@@ -1,10 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.core.checks import messages
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, View
 from .models import Post, Comment, CommentReply, Group, GroupMembers
 from .forms import AddCommentForm, AddCommentReplyForm, AddGroupMemberForm
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
 
@@ -143,6 +142,22 @@ class GroupUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):  # checks whether the current user is the author of this event
         group = self.get_object()
         return self.request.user == group.author
+
+class PostGroupCreateView(LoginRequiredMixin, CreateView):
+
+    model = Post
+    fields = ['content', 'image']
+
+    def form_valid(self, form):
+        group_id = self.kwargs.get('group_id')
+        form.instance.author = self.request.user
+        group = get_object_or_404(Group, id=group_id)
+        form.instance.group = group
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        group_id = self.kwargs.get('group_id')
+        return reverse('group_detail', kwargs={'pk': group_id})
 
 def member_delete(request, group_id, member_id ):
 
