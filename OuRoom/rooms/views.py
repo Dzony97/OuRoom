@@ -63,7 +63,6 @@ class PostLike(LoginRequiredMixin, View):
         post = Post.objects.get(pk=pk)
         user_liked = post.like.filter(pk=request.user.pk).exists()
 
-
         if user_liked:
             post.like.remove(request.user)
             liked = False
