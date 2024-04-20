@@ -146,6 +146,16 @@ class GroupUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         group = self.get_object()
         return self.request.user == group.author
 
+class PostGroupListView(ListView):
+
+    model = Post
+    template_name = 'rooms/group_detail.html'
+    context_object_name = 'post_list'
+
+    def get_queryset(self):
+        group_id = self.kwargs['group_id']
+        return Post.objects.filter(group_id=group_id)
+
 class PostGroupCreateView(LoginRequiredMixin, CreateView):
 
     model = Post
