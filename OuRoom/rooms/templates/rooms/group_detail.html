@@ -28,7 +28,40 @@
 
 
     <div class="center-container">
-        <a href="{% url 'group_post' %}" class="submit-style">Dodaj post</a>
+        <a href="{% url 'group_post' group.pk %}" class="submit-style">Dodaj post</a>
+            {% for post in post_list %}
+                <article class="media content-section">
+
+                    <a href="{{ post.get_absolute_url }}" class="post-link"><i class="fa-solid fa-info"></i></a>
+
+                    <p>{{ post.author }}</p>
+                    <p>{{ post.time_release|date:"F d, Y, H:i" }}</p>
+                    <p>{{ post.content }}</p>
+
+                    {% if post.image %}
+                        <p><img src="{{ post.image.url }}" class="post-image"></p>
+                    {% endif %}
+
+                    <form method="POST" action="{% url 'post_like' post.pk %}" class="like-form" data-post-id="{{ post.pk }}">
+
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <button type="submit" value="{{ post.pk }}">
+                            <i id="like-icon-{{ post.pk }}" class="{% if request.user in post.like.all %}fa-regular{% else %}fa-solid{% endif %} fa-thumbs-up"><span id="like-count-{{ post.pk }}">{{ post.like.all.count }} </span></i>
+                        </button>
+
+                        {% if post.comments.count %}
+                            <a href="{% url 'post_detail' post.pk %}"><i class="fa-regular fa-comment">{{ post.comments.count }}</i></a>
+                        {% else %}
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'post_detail' post.pk %}"><i class="fa-solid fa-comment-medical"></i></a>
+                            {% endif %}
+                        {% endif %}
+
+                    </form>
+
+                </article>
+            {% endfor %}
     </div>
 
 

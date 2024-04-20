@@ -13,6 +13,9 @@ class PostListView(ListView):
     template_name = 'rooms/mainroom.html'
     context_object_name = 'post_list'
 
+    def get_queryset(self):
+        return Post.objects.filter(group__isnull=True)
+
 class PostDetailView(DetailView):
 
     model = Post
@@ -155,9 +158,14 @@ class PostGroupCreateView(LoginRequiredMixin, CreateView):
         form.instance.group = group
         return super().form_valid(form)
 
-    def get_success_url(self):
-        group_id = self.kwargs.get('group_id')
-        return reverse('group_detail', kwargs={'pk': group_id})
+class GroupPostDetailView(DetailView):
+
+    model = Post
+    context_object_name = 'group_post'
+
+def some_view(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    return render(request, 'group_detail.html', {'post': post})
 
 def member_delete(request, group_id, member_id ):
 
