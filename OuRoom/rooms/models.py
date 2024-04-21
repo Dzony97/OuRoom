@@ -22,7 +22,7 @@ class Post(models.Model):
     content = models.TextField()
     image = models.ImageField(null=True, blank=True, upload_to='images/')
     like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='post_like', blank=True)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE, blank=True, null=True, related_name='group_post' )
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, blank=True, null=True, related_name='group_post')
 
     class Meta:
         ordering = ['-time_release']

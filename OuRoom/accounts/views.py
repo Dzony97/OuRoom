@@ -52,7 +52,7 @@ def log_in(request):
         if form.is_valid():
             user = form.get_user()
 
-            if user is not None:
+            if user is not None: # If user is in DB login
                 auth.login(request, user)
                 return redirect('main_room')
 
@@ -74,17 +74,17 @@ def welcome(request):
 @login_required
 def profile_view(request):
 
-    show_settings = False
+    show_settings = False  # Flag for change profile/settings
 
     if request.method == "POST":
 
-        u_form = UserUpdateForm(request.POST, instance=request.user) # instance mówi formularzowi, że ma on operować na istniejącej instancji modelu
-        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile) # instance mowi formularzowi ze ma operować na modelu profile
+        u_form = UserUpdateForm(request.POST, instance=request.user) # operating on an existing model instance
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile) # operating on an model profile
         ch_form = SetPasswordForm(request.user, request.POST)
         new_password1 = request.POST.get('new_password1')
         new_password2 = request.POST.get('new_password2')
 
-        if request.POST['action'] == 'update_profile':
+        if request.POST['action'] == 'update_profile': # action update_profile_data
 
             if u_form.is_valid() and p_form.is_valid():
                 u_form.save()
@@ -92,12 +92,12 @@ def profile_view(request):
                 messages.success(request, f'Twoje konto zostało zaktualizowane!')
                 return redirect('profile')
 
-        if request.POST['action'] == 'update_password':
+        if request.POST['action'] == 'update_password': # action change password
 
             if ch_form.is_valid():
                 ch_form.save()
                 messages.success(request, f'Twoje hasło zostało zmienione!')
-                update_session_auth_hash(request, request.user)
+                update_session_auth_hash(request, request.user) # prevents logging out
                 return redirect('profile')
             elif new_password1 != new_password2:
                 messages.error(request, "Podane hasła różnią się od siebie!")
@@ -108,7 +108,7 @@ def profile_view(request):
         p_form = ProfileUpdateForm(instance=request.user.profile)
         ch_form = SetPasswordForm(request.user)
 
-    user_profile, created = Profile.objects.get_or_create(user=request.user) #  # Created or download user profile
+    user_profile, created = Profile.objects.get_or_create(user=request.user) # Created or download user profile
 
     context = {
         'u_form': u_form,

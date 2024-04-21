@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, View
 from .models import Post, Comment, CommentReply, Group, GroupMembers
 from .forms import AddCommentForm, AddCommentReplyForm, AddGroupMemberForm
@@ -14,7 +14,7 @@ class PostListView(ListView):
     context_object_name = 'post_list'
 
     def get_queryset(self):
-        return Post.objects.filter(group__isnull=True)
+        return Post.objects.filter(group__isnull=True) # Take posts that are not in any group
 
 class PostDetailView(DetailView):
 
@@ -22,7 +22,7 @@ class PostDetailView(DetailView):
     context_object_name = 'post'
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs) # get the context for the template
         context['commentform'] = AddCommentForm()
         context['commentreplyform'] = AddCommentReplyForm()
         return context
@@ -85,7 +85,7 @@ class GroupListView(ListView):
         user = self.request.user
 
         return Group.objects.filter(Q(membership__user=user) | Q(author=user)).distinct()
-        # Q = allows to combine conditions. Show groups in which you are a member of founder
+        # Q = allows to combine conditions. Show groups in which you are a member of founder / elimination of duplicates
 
 class GroupCreateView(LoginRequiredMixin, CreateView):
 
@@ -101,7 +101,7 @@ class GroupDetailView(DetailView):
     model = Group
     context_object_name = 'group'
     template_name = 'rooms/group_detail.html'
-    pk_url_kwarg = 'group_id'
+    pk_url_kwarg = 'group_id' # Change pk to group_id in url
 
     def get_object(self, queryset=None):
 
@@ -124,7 +124,7 @@ class GroupDetailView(DetailView):
             new_member.save()
             return redirect(self.get_object().get_absolute_url())
         else:
-            return self.render_to_response(self.get_context_data(form=form))
+            return render(request, 'group_detail.html', {'form': form})
 
 class GroupDeleteView(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
 
@@ -183,7 +183,7 @@ def member_delete(request, group_id, member_id ):
     group = get_object_or_404(Group, id=group_id)
     member = get_object_or_404(GroupMembers, id=member_id, group=group)
 
-    if request.user == member.user or request.user == group.author:
+    if request.user == member.user or request.user == group.author: #The group leader and member (himself) can remove them from the group
         if request.method == 'POST':
             member.delete()
             return redirect('group_detail', group_id=group_id)
