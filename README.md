@@ -85,6 +85,6 @@ Python: Ensure you have Python installed. You can download it from the official 
 ### Create user and login
 
 <p float="left">
-  <img src="screen/login.png" alt="Add Set" width="400" style="margin-right: 10px;"/>
-  <img src="screen/registration.png" alt="My Sets" width="400" style="margin-left: 10px;"/>
+  <img src="screen/login.png" alt="Login" width="1000" style="margin-right: 10px;"/>
+  <img src="screen/registration.png" alt="Registration" width="1000" style="margin-left: 10px;"/>
 </p>
