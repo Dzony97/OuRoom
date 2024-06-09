@@ -92,16 +92,23 @@ Python: Ensure you have Python installed. You can download it from the official 
   <img src="screen/registration.png" alt="Registration" width="900" style="margin-left: 10px;"/>
 </p>
 
-### Add, comment and like posts
+### Post Interactions
+
+- **Add Posts**: Users can create and share posts within their groups or on their profile.
+- **Comment on Posts**: Users can comment on posts to engage in discussions or provide feedback.
+- **Like Posts**: Users can like posts to show their appreciation or support.
 
 <p float="left">
   <img src="screen/mainroom.png" alt="Login" width="900" style="margin-right: 10px;"/>
   <img src="screen/post_detail.png" alt="Registration" width="900" style="margin-left: 10px;"/>
 </p>
 
-### Create group and invite friends 
+### Group Creation and Invitations
+
+- **Create Group**: Users can create groups based on their interests or purposes.
+- **Invite Friends**: Users can invite their friends to join their created groups via email or through the application.
 
 <p float="left">
-  <img src="screen/mainroom.png" alt="Login" width="900" style="margin-right: 10px;"/>
-  <img src="screen/post_detail.png" alt="Registration" width="900" style="margin-left: 10px;"/>
+  <img src="screen/chose_group.png" alt="Login" width="900" style="margin-right: 10px;"/>
+  <img src="screen/group.png" alt="Registration" width="900" style="margin-left: 10px;"/>
 </p>
