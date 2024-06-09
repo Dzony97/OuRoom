@@ -94,7 +94,7 @@ Python: Ensure you have Python installed. You can download it from the official 
 
 ### Post Interactions
 
-- **Add Posts**: Users can create and share posts within their groups or on their profile.
+- **Add Posts**: Users can create posts within their groups or on main page.
 - **Comment on Posts**: Users can comment on posts to engage in discussions or provide feedback.
 - **Like Posts**: Users can like posts to show their appreciation or support.
 
@@ -106,9 +106,15 @@ Python: Ensure you have Python installed. You can download it from the official 
 ### Group Creation and Invitations
 
 - **Create Group**: Users can create groups based on their interests or purposes.
-- **Invite Friends**: Users can invite their friends to join their created groups via email or through the application.
+- **Invite Friends**: Users can invite their friends to join their created groups.
 
 <p float="left">
   <img src="screen/chose_group.png" alt="Login" width="900" style="margin-right: 10px;"/>
   <img src="screen/group.png" alt="Registration" width="900" style="margin-left: 10px;"/>
+</p>
+
+### Do you feel like playing Snake?
+<p float="left">
+  <img src="screen/snake.png" alt="Login" width="900" style="margin-right: 10px;"/>
+
 </p>
