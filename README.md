@@ -16,6 +16,7 @@ List of main technologies used in the project:
 - **Backend**: Django
 - **API Fetching**: JavaScript Fetch API
 
+
 ##Setup
 To set up the OuRoom project, you will need to install Python, Django, and perform database migrations. Below are the detailed steps to get you started:
 
