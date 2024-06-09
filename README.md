@@ -84,8 +84,8 @@ Python: Ensure you have Python installed. You can download it from the official 
 
 ### User Registration and Login
 
-Create User: Users can sign up by providing their necessary details like name, email, and password.
-Login: Registered users can log in using their email and password to access their account.
+- **Create User**: Users can sign up by providing their necessary details like name, email, and password.
+- **Login**: Registered users can log in using their email and password to access their account.
 
 <p float="left">
   <img src="screen/login.png" alt="Login" width="900" style="margin-right: 10px;"/>
