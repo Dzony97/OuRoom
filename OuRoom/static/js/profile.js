@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
-  var showSettings = "{{ show_settings }}";  // Pobierz flagę z kontekstu
-  var settingsIcon = document.querySelector('.settings-icon');
-  var profileInfo = document.querySelector('.profile-info');
-  var settingsMenu = document.getElementById('settings-menu');
+  const showSettings = "{{ show_settings }}";  // Flag
+  const settingsIcon = document.querySelector('.settings-icon');
+  const profileInfo = document.querySelector('.profile-info');
+  const settingsMenu = document.getElementById('settings-menu');
 
   if (showSettings === "True") {
-    settingsMenu.style.display = "block";  // Pokaż menu ustawień
-    profileInfo.style.display = "none";    // Ukryj informacje o profilu
+    settingsMenu.style.display = "block";  // Show settings menu
+    profileInfo.style.display = "none";    // Hide profile information
   }
 
   settingsIcon.addEventListener('click', function() {

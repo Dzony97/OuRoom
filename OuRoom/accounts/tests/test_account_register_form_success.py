@@ -100,7 +100,7 @@ def test_user_update_form_success():
 def test_user_update_form_fail():
     #Arrange
     form = UserUpdateForm({"last_name": "",
-                           "first_name": "Imię",})
+                           "first_name": "Imię"})
 
     #Action
     result = form.is_valid()
@@ -111,17 +111,21 @@ def test_user_update_form_fail():
 @pytest.mark.django_db
 def test_profile_update_form_fail():
     # Arrange
-    user = CustomUser.objects.create_user(username='testuser', password='12345')
-    profile = Profile.objects.create(user=user, location='New Location', birth_date='2000-01-01')
+
+    user = CustomUser.objects.create_user(username='testuserrr', password='password')
+    profile = Profile.objects.create(user=user, location='New Locationnn', birth_date='2000-02-01')
 
     form_data = {
         "location": "Krasnystaw",
-        "birth_date": "2023-13-13",
+        "birth_date": "2023-13-13"
     }
     form = ProfileUpdateForm(data=form_data, instance=profile)
 
     # Action
     result = form.is_valid()
+    if result:
+        form.save()
+        profile.refresh_from_db()
 
     # Assert
     assert result is False
@@ -129,12 +133,12 @@ def test_profile_update_form_fail():
 @pytest.mark.django_db
 def test_profile_update_form_success():
     # Arrange
-    user = CustomUser.objects.create_user(username='testuser', password='12345')
-    profile = Profile.objects.create(user=user, location='New Location', birth_date='2000-01-01')
+    user = CustomUser.objects.create_user(username='testuserplpl', password='12345')
+    profile = Profile.objects.create(user=user, location='New Location Szkola', birth_date='2000-05-01')
 
     form_data = {
         "location": "Krasnystaw",
-        "birth_date": "2023-12-12",
+        "birth_date": "2023-12-12"
     }
     form = ProfileUpdateForm(data=form_data, instance=profile)
 
@@ -153,7 +157,7 @@ def test_profile_update_form_success():
 def test_change_password_success():
 
     #Arrange
-    user = CustomUser.objects.create_user(username='testuser', email='user@test.com', password='password')
+    user = CustomUser.objects.create_user(username='testuseryufu', email='user@test.com', password='password')
 
     form_data = {'new_password1': 'new_password', 'new_password2': 'new_password'}
 

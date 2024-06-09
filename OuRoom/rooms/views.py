@@ -113,6 +113,8 @@ class GroupDetailView(DetailView):
         context['form'] = AddGroupMemberForm(group_id=self.object.id)
         context['members'] = GroupMembers.objects.filter(group=self.object) #Download all members
         context['post_list'] = Post.objects.filter(group=self.object)
+        print(context)
+        print('dupa')
         return context
 
     def post(self, request, *args, **kwargs):
