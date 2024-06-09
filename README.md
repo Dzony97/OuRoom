@@ -82,9 +82,26 @@ Python: Ensure you have Python installed. You can download it from the official 
 
 ## Screen 
 
-### Create user and login
+### User Registration and Login
+
+Create User: Users can sign up by providing their necessary details like name, email, and password.
+Login: Registered users can log in using their email and password to access their account.
 
 <p float="left">
-  <img src="screen/login.png" alt="Login" width="1000" style="margin-right: 10px;"/>
-  <img src="screen/registration.png" alt="Registration" width="1000" style="margin-left: 10px;"/>
+  <img src="screen/login.png" alt="Login" width="900" style="margin-right: 10px;"/>
+  <img src="screen/registration.png" alt="Registration" width="900" style="margin-left: 10px;"/>
+</p>
+
+### Add, comment and like posts
+
+<p float="left">
+  <img src="screen/mainroom.png" alt="Login" width="900" style="margin-right: 10px;"/>
+  <img src="screen/post_detail.png" alt="Registration" width="900" style="margin-left: 10px;"/>
+</p>
+
+### Create group and invite friends 
+
+<p float="left">
+  <img src="screen/mainroom.png" alt="Login" width="900" style="margin-right: 10px;"/>
+  <img src="screen/post_detail.png" alt="Registration" width="900" style="margin-left: 10px;"/>
 </p>
